@@ -2,7 +2,7 @@
   "name": "vue-appcore-example",
   "version": "1.0.0",
   "main": "index.js",
-   "scripts": {
+  "scripts": {
     "dev": "gulp -a",
     "build": "gulp -p -a"
   },
@@ -34,6 +34,7 @@
     "raw-loader": "^0.5.1",
     "require-dir": "^0.3.0",
     "sass-loader": "^3.1.2",
+    "script-loader": "^0.7.0",
     "style-loader": "^0.13.0",
     "svg-sprite-loader": "0.0.15",
     "ubase-vue": "^1.0.3",

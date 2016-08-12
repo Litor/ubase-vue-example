@@ -10,20 +10,25 @@ export default {
     login: null,
     password: null,
   }),
+  route: {
+    activate: function(transition) {
+      console.log('hook-example activated!')
+      transition.next()
+    }},
 
-  vuex: {
-    actions: {
+    vuex: {
+      actions: {
 
+      },
+
+      getters: {
+
+      }
     },
 
-    getters: {
+    ready() {},
 
-    }
-  },
+    methods: {
 
-  ready() {},
-
-  methods: {
-
-  },
-}
+    },
+  }
