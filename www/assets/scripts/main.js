@@ -1,56 +1,6 @@
 /******/ (function(modules) { // webpackBootstrap
-/******/ 	// install a JSONP callback for chunk loading
-/******/ 	var parentJsonpFunction = window["webpackJsonp"];
-/******/ 	window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules) {
-/******/ 		// add "moreModules" to the modules object,
-/******/ 		// then flag all "chunkIds" as loaded and fire callback
-/******/ 		var moduleId, chunkId, i = 0, callbacks = [];
-/******/ 		for(;i < chunkIds.length; i++) {
-/******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId])
-/******/ 				callbacks.push.apply(callbacks, installedChunks[chunkId]);
-/******/ 			installedChunks[chunkId] = 0;
-/******/ 		}
-/******/ 		for(moduleId in moreModules) {
-/******/ 			var _m = moreModules[moduleId];
-
-/******/ 			// Check if module is deduplicated
-/******/ 			switch(typeof _m) {
-/******/ 			case "object":
-/******/ 				// Module can be created from a template
-/******/ 				modules[moduleId] = (function(_m) {
-/******/ 					var args = _m.slice(1), templateId = _m[0];
-/******/ 					return function (a,b,c) {
-/******/ 						modules[templateId].apply(this, [a,b,c].concat(args));
-/******/ 					};
-/******/ 				}(_m));
-/******/ 				break;
-/******/ 			case "function":
-/******/ 				// Normal module
-/******/ 				modules[moduleId] = _m;
-/******/ 				break;
-/******/ 			default:
-/******/ 				// Module is a copy of another module
-/******/ 				modules[moduleId] = modules[_m];
-/******/ 				break;
-/******/ 			}
-/******/ 		}
-/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules);
-/******/ 		while(callbacks.length)
-/******/ 			callbacks.shift().call(null, __webpack_require__);
-
-/******/ 	};
-
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
-/******/ 	// object to store loaded and loading chunks
-/******/ 	// "0" means "already loaded"
-/******/ 	// Array means "loading", array contains callbacks
-/******/ 	var installedChunks = {
-/******/ 		0:0,
-/******/ 		2:0
-/******/ 	};
 
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -76,29 +26,6 @@
 /******/ 		return module.exports;
 /******/ 	}
 
-/******/ 	// This file contains only the entry chunk.
-/******/ 	// The chunk loading function for additional chunks
-/******/ 	__webpack_require__.e = function requireEnsure(chunkId, callback) {
-/******/ 		// "0" is the signal for "already loaded"
-/******/ 		if(installedChunks[chunkId] === 0)
-/******/ 			return callback.call(null, __webpack_require__);
-
-/******/ 		// an array means "currently loading".
-/******/ 		if(installedChunks[chunkId] !== undefined) {
-/******/ 			installedChunks[chunkId].push(callback);
-/******/ 		} else {
-/******/ 			// start chunk loading
-/******/ 			installedChunks[chunkId] = [callback];
-/******/ 			var head = document.getElementsByTagName('head')[0];
-/******/ 			var script = document.createElement('script');
-/******/ 			script.type = 'text/javascript';
-/******/ 			script.charset = 'utf-8';
-/******/ 			script.async = true;
-
-/******/ 			script.src = __webpack_require__.p + "assets/scripts/" + ({}[chunkId]||chunkId) + "-" + chunkId + ".js";
-/******/ 			head.appendChild(script);
-/******/ 		}
-/******/ 	};
 
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -150,7 +77,7 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _store = __webpack_require__(28);
+	var _store = __webpack_require__(17);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -188,14 +115,13 @@
 
 	var _test4 = _interopRequireDefault(_test3);
 
-	var _index = __webpack_require__(19);
+	var _index = __webpack_require__(15);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-
 	  '/test1': {
 	    title: '测试1',
 	    component: _test2.default
@@ -204,14 +130,8 @@
 	  '/test2': {
 	    title: '测试2',
 	    component: _test4.default
-	  },
-
-	  '/test3': {
-	    title: '测试3',
-	    component: function component(resolve) {
-	      __webpack_require__.e/* require */(1, function(__webpack_require__) { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(21)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this));
-	    }
 	  }
+
 	};
 
 /***/ },
@@ -314,7 +234,7 @@
 
 /***/ },
 /* 7 */
-[31, 8],
+[21, 8],
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -693,14 +613,10 @@
 
 /***/ },
 /* 13 */
-[31, 14],
+[21, 14],
 /* 14 */
 8,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -709,7 +625,7 @@
 	  value: true
 	});
 
-	var _template = __webpack_require__(20);
+	var _template = __webpack_require__(16);
 
 	var _template2 = _interopRequireDefault(_template);
 
@@ -742,21 +658,13 @@
 	};
 
 /***/ },
-/* 20 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = "not found page";
 
 /***/ },
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
-5,
-/* 27 */,
-/* 28 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -769,7 +677,7 @@
 	  state: {},
 	  actions: [],
 	  mutations: [],
-	  modules: requireAll(__webpack_require__(29)),
+	  modules: requireAll(__webpack_require__(18)),
 	  strict: ('develope') === 'develope'
 	};
 	exports.default = STORE;
@@ -791,12 +699,12 @@
 	}
 
 /***/ },
-/* 29 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
 		"./test1/test1.vuex.js": 5,
-		"./test3/test3.vuex.js": 26
+		"./test3/test3.vuex.js": 19
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -809,12 +717,73 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 29;
+	webpackContext.id = 18;
 
 
 /***/ },
-/* 30 */,
-/* 31 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getBasicInfo = exports.setTestState = exports.mutations = exports.state = undefined;
+
+	var _test = __webpack_require__(20);
+
+	var _test2 = _interopRequireDefault(_test);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	var TEST1_STATE = 'TEST1_STATE';
+
+	var defaults = {
+	  message: 'liujun'
+	};
+
+	// initial state
+	var state = exports.state = defaults;
+
+	// mutations
+	var mutations = exports.mutations = _defineProperty({}, TEST1_STATE, function (state, data) {
+	  state.message = data.message;
+	});
+
+	// actions
+	var setTestState = exports.setTestState = function setTestState(_ref, str) {
+	  var actions = _ref.actions;
+	  var dispatch = _ref.dispatch;
+
+	  return dispatch(TEST1_STATE, { message: str });
+	};
+
+	var getBasicInfo = exports.getBasicInfo = function getBasicInfo(_ref2) {
+	  var dispatch = _ref2.dispatch;
+
+	  _test2.default.basicInfo().done(function () {});
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	function basicInfo() {}
+
+	exports.default = {
+	  basicInfo: basicInfo
+	};
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag

@@ -1,7 +1,7 @@
 const TEST1_STATE = 'TEST1_STATE'
 
 var defaults = {
-  message: 'liujun',
+  message: 'liujuc',
 }
 
 // initial state
@@ -15,6 +15,6 @@ export const mutations = {
 }
 
 // actions
-export const setTestState = ({ actions, dispatch }, str) => {
+export const setTestState = ({ actions, dispatch }, str)=> {
   return dispatch(TEST1_STATE, { message: str })
 }
