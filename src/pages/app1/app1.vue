@@ -1,13 +1,13 @@
 <template>
   <article bh-layout-role="single">
-    test31115554322{{app.message}}
+    1115554322{{app.message}}
     <button @click="change">测试vuex</button>
   </article>
 </template>
 <style scoped lang="sass">
 </style>
 <script>
-import { setTestState } from './test3.vuex'
+import { setTestState } from './app1.vuex'
 export default {
   data: () => ({
     login: '111111',

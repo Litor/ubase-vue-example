@@ -1,4 +1,4 @@
-import test1 from './test2.vue'
+import test1 from './app2.vue'
 
 export default {
   '/': {
