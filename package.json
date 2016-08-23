@@ -1,10 +1,10 @@
 {
   "name": "ubase-vue-example",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "description": "",
-  "main": "dist/ubase-vue.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp --debug",
+    "build": "gulp --production"
   },
   "author": "",
   "license": "ISC",
@@ -37,8 +37,8 @@
     "scriptjs": "^2.5.8",
     "string-replace-webpack-plugin": "0.0.3",
     "style-loader": "^0.13.1",
+    "ubase-vue": "^1.0.7",
     "url-loader": "^0.5.7",
-	"ubase-vue": "^1.0.5",
     "vinyl-named": "^1.1.0",
     "vue": "^1.0.19",
     "vue-html-loader": "^1.2.3",
