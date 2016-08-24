@@ -1,6 +1,7 @@
 <template>
   <article bh-layout-role="single">
-    1115554322{{app.message}}
+    11154322866{{app.message}}
+    <div>config:APP_NAME:{{$root.config.APP_NAME}}</div>
     <button @click="change">测试vuex</button>
   </article>
 </template>
@@ -10,7 +11,7 @@
 import { setTestState } from './app1.vuex'
 export default {
   data: () => ({
-    login: '111111',
+    login: '111333111',
     password: null,
   }),
 
@@ -27,6 +28,7 @@ export default {
   },
 
   ready() {
+    console.log(this.$root.config.APP_NAME)
   },
 
   methods: {
