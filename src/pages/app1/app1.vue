@@ -1,6 +1,8 @@
 <template>
   <article bh-layout-role="single">
-    11154322866{{app.message}}
+    <div>data:{{login}}</div>
+    <div>vuex:{{app.message}}</div>
+    <div>global vuex:{{global.message}}</div>
     <div>config:APP_NAME:{{$root.config.APP_NAME}}</div>
     <button @click="change">测试vuex</button>
   </article>
@@ -11,7 +13,7 @@
 import { setTestState } from './app1.vuex'
 export default {
   data: () => ({
-    login: '111333111',
+    login: '2010111',
     password: null,
   }),
 
@@ -23,6 +25,10 @@ export default {
     getters: {
       app: function(state) {
         return state.app
+      },
+
+      global:function(state){
+        return state.global
       }
     }
   },

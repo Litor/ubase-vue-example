@@ -1,7 +1,7 @@
 const TEST1_STATE = 'TEST1_STATE'
 
 var defaults = {
-  message: 'liujun',
+  message: 'vuex success',
 }
 
 // initial state
