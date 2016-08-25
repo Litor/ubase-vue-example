@@ -1,4 +1,4 @@
-const TEST1_STATE = 'TEST1_STATE'
+const TEST1_GLOBAL_STATE = 'TEST1_GLOBAL_STATE'
 
 var defaults = {
   message: 'global vuex success',
@@ -9,12 +9,12 @@ export const state = defaults
 
 // mutations
 export const mutations = {
-  [TEST1_STATE](state, data) {
+  [TEST1_GLOBAL_STATE](state, data) {
     state.message = data.message
   }
 }
 
 // actions
 export const setTestState = ({ actions, dispatch }, str)=> {
-  return dispatch(TEST1_STATE, { message: str })
+  return dispatch(TEST1_GLOBAL_STATE, { message: str })
 }
