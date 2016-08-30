@@ -1,6 +1,7 @@
 {
   "APP_NAME": "应用名称",
   "BH_VERSION":"1.2",
+  "LANG":"en",
   "HEADER": {
     "dropMenu": [{
       "text": "就业资讯师",

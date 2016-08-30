@@ -3,6 +3,9 @@
     <div>data:{{login}}</div>
     <div>vuex:{{app.message}}</div>
     <div>global vuex:{{global.message}}</div>
+    <div>国际化测试_normal: {{$t('title')}}</div>
+    <div>国际化测试_format: {{$t('message.hello', { msg: i18ntest })}}</div>
+    <div>国际化测试_inJs: {{i18nInJs}}</div>
     <div>config:APP_NAME:{{$root.config.APP_NAME}}</div>
     <button @click="change">测试vuex</button>
   </article>
@@ -13,8 +16,10 @@
 import { setTestState } from './app1.vuex'
 export default {
   data: () => ({
-    login: '2010111',
+    login: '2011111',
     password: null,
+    i18ntest:'i18n format test',
+    i18nInJs:Vue.t('title')
   }),
 
   vuex: {
@@ -27,7 +32,7 @@ export default {
         return state.app
       },
 
-      global:function(state){
+      global: function(state) {
         return state.global
       }
     }
