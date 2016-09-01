@@ -8,21 +8,18 @@
     <div>国际化测试_inJs: {{i18nInJs}}</div>
     <div>config:APP_NAME:{{$root.config.APP_NAME}}</div>
     <button @click="change">测试vuex</button>
-    <subpage></subpage>
   </article>
 </template>
 <style scoped lang="sass">
 </style>
 <script>
-import { setTestState } from './app1.vuex'
-import subpage from './subpage.vue'
+import { setTestState } from '../app1.vuex'
 export default {
-  components: { subpage },
   data: () => ({
     login: '2011111',
     password: null,
-    i18ntest: 'i18n format test',
-    i18nInJs: Vue.t('title')
+    i18ntest:'i18n format test',
+    i18nInJs:Vue.t('title')
   }),
 
   vuex: {
