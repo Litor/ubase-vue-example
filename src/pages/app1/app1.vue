@@ -15,7 +15,7 @@
 </style>
 <script>
 import { setTestState } from './app1.vuex'
-import subpage from './subpage.vue'
+import subpage from './subpage/subpage.vue'
 export default {
   components: { subpage },
   data: () => ({

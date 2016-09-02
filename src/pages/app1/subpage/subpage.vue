@@ -7,7 +7,7 @@
 <style scoped lang="sass">
 </style>
 <script>
-import { setTestState } from './app1.vuex'
+import { setTestState } from '../app1.vuex'
 export default {
   data: () => ({
     subpagedata:'subpage'
