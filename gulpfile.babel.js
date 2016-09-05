@@ -55,7 +55,12 @@ gulp.task('connect', () =>
 )
 
 gulp.task('meta', cb => {
-  copyremotefile('http://res.wisedu.com/WeCloud/emap-meta/jcsj/', path.resolve('./src/statics/meta-info/'))
+  try {
+    del.sync('./src/statics/meta-info/**/*.*')
+  } catch (e) {
+    console.log('%s do not clean', dest)
+  }
+  copyremotefile('http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/', path.resolve('./src/statics/meta-info/'))
 })
 
 gulp.task('clean', cb => {
