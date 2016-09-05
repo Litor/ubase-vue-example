@@ -12,6 +12,7 @@ import env from 'gulp-env'
 import proxy from 'http-proxy-middleware'
 import copyremotefile from 'copy-remote-file'
 
+let metaInfoUrl = 'http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/'
 let dest = './www'
 let port = '8081'
 let envs = { NODE_ENV: config.NODE_ENV }
@@ -60,7 +61,7 @@ gulp.task('meta', cb => {
   } catch (e) {
     console.log('%s do not clean', dest)
   }
-  copyremotefile('http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/', path.resolve('./src/statics/meta-info/'))
+  copyremotefile(metaInfoUrl, path.resolve('./src/statics/meta-info/'))
 })
 
 gulp.task('clean', cb => {
