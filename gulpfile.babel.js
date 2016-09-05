@@ -10,6 +10,7 @@ import configWebpack from 'ubase-vue/dist/apptools/webpack/index'
 import errorHandler from 'ubase-vue/dist/apptools/webpack/helpers/errorHandler'
 import env from 'gulp-env'
 import proxy from 'http-proxy-middleware'
+import copyremotefile from 'copy-remote-file'
 
 let dest = './www'
 let port = '8081'
@@ -52,6 +53,10 @@ gulp.task('connect', () =>
 
   })
 )
+
+gulp.task('meta', cb => {
+  copyremotefile('http://res.wisedu.com/WeCloud/emap-meta/jcsj/', path.resolve('./src/statics/meta-info/'))
+})
 
 gulp.task('clean', cb => {
   try {
