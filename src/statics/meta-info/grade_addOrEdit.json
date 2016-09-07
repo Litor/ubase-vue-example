@@ -1,0 +1,1 @@
+{"models":[{"name":"grade_addOrEdit","appName":"","modelName":"grade_addOrEdit","url":"/jcsj-apps-web/grade/addOrEdit","controls":[{"name":"wid","dataType":"string","caption":"年级wid","hidden":true},{"name":"code","dataType":"integer","caption":"代码","hidden":true},{"name":"name","dataType":"string","caption":"名称","required":true,"xtype":"number-range"}]}]}
