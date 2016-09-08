@@ -1,6 +1,6 @@
 <template>
   <div class="opt-buttons bh-mv-16">
-    <a href="javascript:void(0);" class="bh-btn bh-btn-{{item.primary?'primary':'default'}} waves-effect" @click='click(item.click)' v-for="item in buttons">{{item.text}}</a>
+    <a href="javascript:void(0);" class="bh-btn bh-btn-{{item.primary?'primary':'default'}} waves-effect" @click='click(item.click)' v-for="item in buttonList">{{item.text}}</a>
   </div>
 </template>
 <style scoped lang="sass">
@@ -10,10 +10,18 @@
 </style>
 <script>
 export default {
-  props: ['buttons'],
+  props: ['name'],
+  data: function() {
+    return {
+      buttonList: []
+    }
+  },
+  created() {
+    this.buttonList = this.$parent.pageopt[this.name ? this.name : 'buttonList']
+  },
   methods: {
     click(click) {
-       this.$dispatch(click)
+      this.$dispatch(click)
     }
   }
 }

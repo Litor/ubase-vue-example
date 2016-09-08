@@ -21,7 +21,7 @@ export default {
 
     getters: {
       app: function(state) {
-        return state.app
+        return state.app3
       }
     }
   },

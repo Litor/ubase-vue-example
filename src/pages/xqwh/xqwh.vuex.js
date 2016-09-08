@@ -1,40 +1,36 @@
-import service from './xqwh.service'
+import service from './service'
 const TEST1_STATE = 'TEST1_STATE'
 
-var addedit_state = {
-  options: {
-    pagePath: service.api.campus_addOrEdit_meta,
-    modelName: 'campus_addOrEdit',
-    outline: false,
-    readonly: false,
-    model: 'v'
+var defaults = {
+  paperdialog: {
+    currentView: 'xqwh1',
+    title: 'dkd'
   },
-  outline: false
-}
-
-var xqwh_state = {
-  paperdialog: 'xqwh1',
   propertydialog: {
-    currentView: 'addEdit',
-    okEvent: 'propertydialog:ok'
+    currentView: 'addedit',
+    okEvent: 'addedit:save',
+    title: '查看详情'
   },
-  buttons: [{
+  buttonList: [{
     text: '新增',
-    click: 'buttonlist:add',
+    click: 'xqwh:buttonlist:add',
     primary: true
   }, {
     text: '删除',
-    click: 'buttonlist:del'
+    click: 'xqwh:buttonlist:del'
   }],
-  search: {
+  simpleSearch: {
     placeholder: '请输入',
-    searchEvent: 'search:top'
+    searchEvent: 'xqwh:search:top'
   },
-  form: {
-    pagepath: service.api.campus_addOrEdit_meta,
-    modelName: 'campus_addOrEdit'
+  tipDialog: {
+    del: {
+      type: 'warning',
+      title: '您选择需要删除的信息吗？',
+      okEvent: 'xqwh:tipdialog:del'
+    }
   },
-  options: {
+  emapDatatable: {
     pagePath: service.api.campus_getList_meta,
     url: service.api.campus_getList,
     action: 'campus_getList',
@@ -66,19 +62,15 @@ var xqwh_state = {
       width: 100,
       items: [{
         title: '编辑',
-        name: 'table:edit',
+        name: 'xqwh:table:edit',
         type: 'link'
       }, {
         title: '删除',
-        name: 'table:del',
+        name: 'xqwh:table:del',
         type: 'link'
       }]
     }
   }
-}
-var defaults = {
-  xqwh: xqwh_state,
-  addedit: addedit_state
 }
 
 // initial state

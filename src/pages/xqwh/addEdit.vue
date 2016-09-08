@@ -9,7 +9,7 @@ export default {
   vuex: {
     getters: {
       pageopt: function(state) {
-        return state.app.addedit
+        return state.addedit
       }
     }
   },
@@ -18,8 +18,11 @@ export default {
   },
 
   events: {
-    'form:setvalue': function(val) {
+    'addedit:setvalue': function(val) {
       this.$refs.form.setValue(val)
+    },
+    'addedit:save': function() {
+      console.log(this.$refs.form.getValue())
     }
   }
 }

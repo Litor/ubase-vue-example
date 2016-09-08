@@ -20,7 +20,7 @@ export default {
 
     getters: {
       app: function(state) {
-        return state.app
+        return state.app1
       },
 
       global: function(state) {
