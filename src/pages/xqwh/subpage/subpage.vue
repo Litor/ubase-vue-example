@@ -1,6 +1,6 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2 v-html="title"></h2>
     <section>
       <simple-search></simple-search>
       <button-list></button-list>
@@ -9,16 +9,15 @@
   </article>
 </template>
 <script>
-import pageConfig from './xqwh.config'
-import service from './xqwh.service'
-import addedit from './addedit/addedit.vue'
-import subpage from './subpage/subpage.vue'
+import pageConfig from './subpage.config'
+import service from './subpage.service'
+import addedit from '../addedit/addedit.vue'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import buttonList from 'components/buttonList.vue'
 import simpleSearch from 'components/simpleSearch.vue'
 
 export default {
-  components: { EmapDatatable, buttonList, simpleSearch, addedit, subpage },
+  components: { EmapDatatable, buttonList, simpleSearch, addedit },
 
   data: function() {
     return pageConfig
@@ -51,7 +50,7 @@ export default {
     'xqwh:tipdialog:del': function() {
       alert(33)
     },
-    'xqwh:buttonlist:import': function() {
+    'xqwh:buttonlist:import':function(){
       this.$root.paperdialog(this)
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="opt-buttons bh-mv-16">
-    <a href="javascript:void(0);" class="bh-btn bh-btn-{{item.primary?'primary':'default'}} waves-effect" @click='click(item.click)' v-for="item in buttonList">{{item.text}}</a>
+    <a href="javascript:void(0);" class="bh-btn bh-btn-{{item.primary?'primary':'default'}} waves-effect" @click='click(item.clickEvent)' v-for="item in buttonList">{{item.text}}</a>
   </div>
 </template>
 <style scoped lang="sass">
