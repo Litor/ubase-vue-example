@@ -1,31 +1,31 @@
-import service from './xqwh.service'
+import service from './dwlbwh.service'
 const SET_TITLE = 'SET_TITLE'
 
 // init state
 export const state = {
   title: '校区维护',
   propertyDialog: {
-    currentView: 'xqwhaddedit',
-    okEvent: 'xqwhaddedit:save',
+    currentView: 'dwlbaddedit',
+    okEvent: 'dwlbaddedit:save',
     title: '查看详情'
   },
   buttonList: [{
     text: '新增',
-    clickEvent: 'xqwh:buttonlist:add',
+    clickEvent: 'dwlbwh:buttonlist:add',
     primary: true
   }, {
     text: '删除',
-    clickEvent: 'xqwh:buttonlist:del'
+    clickEvent: 'dwlbwh:buttonlist:del'
   }],
   simpleSearch: {
     placeholder: '请输入',
-    searchEvent: 'xqwh:search:top'
+    searchEvent: 'dwlbwh:search:top'
   },
   tipDialog: {
     del: {
       type: 'warning',
       title: '您选择需要删除的信息吗？',
-      okEvent: 'xqwh:tipdialog:del'
+      okEvent: 'dwlbwh:tipdialog:del'
     }
   },
   tipPop: {
@@ -52,15 +52,6 @@ export const state = {
           return value ? '有效' : '无效'
         }
       }
-    }, {
-      colField: 'name',
-      type: 'tpl',
-      width: 300,
-      column: {
-        cellsRenderer: function(row, column, value, rowData) {
-          return '<a href="#/bzxq" target="_blank" data-action="save-id" data-wid="' + rowData.WID + '">' + value + '</span>'
-        }
-      }
     }],
     checkable: true,
     sortable: true,
@@ -70,11 +61,11 @@ export const state = {
       width: 100,
       items: [{
         title: '编辑',
-        name: 'xqwh:table:edit',
+        name: 'dwlbwh:table:edit',
         type: 'link'
       }, {
         title: '删除',
-        name: 'xqwh:table:del',
+        name: 'dwlbwh:table:del',
         type: 'link'
       }]
     }

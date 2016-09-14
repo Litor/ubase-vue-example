@@ -4,7 +4,7 @@
       <li v-for="item in tabs">{{item.title}}</li>
     </ul>
     <div v-for="item in tabs" class="bh-mt-16">
-     <component :is="item.component" keep-alive></component>
+      <component :is="item.showComponent" keep-alive></component>
     </div>
   </div>
 </template>
@@ -18,17 +18,21 @@ export default {
 
     }
   },
+
   created() {
     var self = this
-    this.tabs.forEach(function(tab){
-      self.$options.components[tab.component] = self.$parent.$options.components[tab.component]
+    this.tabs.forEach(function(tab, index) {
+      self.$set('tabs[' + index + '].showComponent', '')
     })
   },
   ready() {
     var el = $(this.$el)
-
+    var self = this
     el.jqxTabs({
       width: '100%',
+      initTabContent: function(tab) {
+        self.tabs[tab].showComponent = self.tabs[tab].component
+      }
     })
   }
 }

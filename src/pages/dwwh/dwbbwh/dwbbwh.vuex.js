@@ -1,12 +1,12 @@
-import service from './xqwh.service'
+import service from './dwbbwh.service'
 const SET_TITLE = 'SET_TITLE'
 
 // init state
 export const state = {
   title: '校区维护',
   propertyDialog: {
-    currentView: 'xqwhaddedit',
-    okEvent: 'xqwhaddedit:save',
+    currentView: 'dwbbaddedit',
+    okEvent: 'addedit:save',
     title: '查看详情'
   },
   buttonList: [{
@@ -41,7 +41,7 @@ export const state = {
   emapDatatable: {
     pagePath: service.api.getList_meta,
     url: service.api.getList,
-    action: service.api.getList_action,
+    action: 'deptRunType_getList',
     method: 'POST',
     customColumns: [{
       colField: 'status',
@@ -50,15 +50,6 @@ export const state = {
       column: {
         cellsRenderer: function(row, column, value, rowData) {
           return value ? '有效' : '无效'
-        }
-      }
-    }, {
-      colField: 'name',
-      type: 'tpl',
-      width: 300,
-      column: {
-        cellsRenderer: function(row, column, value, rowData) {
-          return '<a href="#/bzxq" target="_blank" data-action="save-id" data-wid="' + rowData.WID + '">' + value + '</span>'
         }
       }
     }],

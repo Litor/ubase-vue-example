@@ -1,7 +1,15 @@
+let app = 'major'
+
 export default {
   api: {
-    campus_getList_meta: './statics/meta-info/campus_getList.json',
-    campus_addOrEdit_meta: './statics/meta-info/campus_addOrEdit.json',
-    campus_getList: '/campus/getList',
+    getList_meta: `./statics/meta-info/${app}_getList.json`,
+    getList_action: `${app}_getList`,
+    addOrEdit_meta: `./statics/meta-info/${app}_addOrEdit.json`,
+    getList: `/jcsj-apps-web/${app}/getList`,
+    delete: `/jcsj-apps-web/${app}/delete`,
   },
+
+  zyDelete(wids) {
+    return Vue.http.post(this.api.delete, { wids: wids })
+  }
 }

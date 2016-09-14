@@ -1,15 +1,10 @@
 <template>
-  <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
-    <section>
-      <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-      <button-list :button-list="pageopt.buttonList"></button-list>
-      <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
-    </section>
-  </article>
+  <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
+  <button-list :button-list="pageopt.buttonList"></button-list>
+  <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
 </template>
 <script>
-import service from './xqwh.service'
+import service from './dwbbwh.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 
 export default {
@@ -18,14 +13,14 @@ export default {
   vuex: {
     getters: {
       pageopt: function(state) {
-        return state.xqwh
+        return state.dwbbwh
       }
-    }
+    },
   },
 
   events: {
     'xqwh:buttonlist:add': function() {
-      this.pageopt.propertyDialog.title = '新增校区'
+      this.pageopt.propertyDialog.title = '新增单位办别'
       Vue.propertyDialog(this)
     },
 
@@ -44,13 +39,13 @@ export default {
     },
 
     'xqwh:table:edit': function(row) {
-      this.pageopt.propertyDialog.title = '编辑校区信息'
+      this.pageopt.propertyDialog.title = '编辑单位办别'
       Vue.propertyDialog(this)
-      this.$broadcast('xqwhaddedit:setvalue', row)
+      this.$broadcast('addedit:setvalue', row)
     },
 
     'xqwh:table:del': function(row) {
-      service.campusDelete([row.wid]).then(({ data }) => {
+      service.deptRunTypeDelete([row.wid]).then(({ data }) => {
         Vue.tipPop(this, 'del_success')
         this.$refs.table.reload()
       })
@@ -64,10 +59,16 @@ export default {
         wids.push(item.wid)
       })
 
-      service.campusDelete(wids).then(({ data }) => {
+      service.deptRunTypeDelete(wids).then(({ data }) => {
         Vue.tipPop(this, 'del_success')
         this.$refs.table.reload()
       })
+    },
+    'xqwh:buttonlist:import': function() {
+      Vue.paperDialog(this)
+    },
+    'addedit:save': function() {
+
     }
   }
 }

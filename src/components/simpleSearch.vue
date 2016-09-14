@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <div class="bh-simple-search">
-      <input class="bh-form-control" type="text" :placeholder="simpleSearch.placeholder">
+      <input class="bh-form-control" type="text" :placeholder="simpleSearch.placeholder" v-model="keyword">
       <a href="javascript:void(0)"><i class="iconfont"></i></a>
     </div>
     <a href="javascript:void(0);" class="bh-btn bh-btn-primary bh-btn-small waves-effect search-button" @click="doSearch(simpleSearch.searchEvent)">搜索</a>
@@ -19,14 +19,17 @@
 </style>
 <script>
 export default {
-  props: ['name'],
+  props: ['name', 'simpleSearch'],
   data: function() {
     return {
-      simpleSearch: {}
+      //simpleSearch: {},
+      keyword: ''
     }
   },
   created() {
-    this.simpleSearch = this.$parent.pageopt[this.name ? this.name : 'simpleSearch']
+    if (!this.simpleSearch) {
+      this.simpleSearch = this.$parent.pageopt[this.name ? this.name : 'simpleSearch']
+    }
   },
   methods: {
     doSearch(searchEvent) {

@@ -6,7 +6,8 @@
   </div>
 </template>
 <script>
-import service from './xzwh.service'
+import { setTitle as setXxdwAddEditTitle } from './xxdwaddedit/xxdwaddedit.vuex'
+import service from './xxdwwh.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 
@@ -16,8 +17,11 @@ export default {
   vuex: {
     getters: {
       pageopt: function(state) {
-        return state.xzwh
+        return state.xxdwwh
       }
+    },
+    actions: {
+      setXxdwAddEditTitle
     }
   },
 
@@ -26,18 +30,22 @@ export default {
     $(this.$el).on('click', '.opt-button', function(e) {
       var _this = $(this);
       var row = JSON.parse(_this.attr('data-row'))
-      var name = _this.attr('data-name')
+      var name = _this.attr('data-name');
       self.$dispatch(name, row)
     })
   },
 
   events: {
-    'xzwh:buttonlist:add': function() {
-      Vue.propertyDialog(this)
+    'xxdwwh:card:edit': function(xx) {
+      console.log(xx)
+    },
+    'xxdwwh:buttonlist:add': function() {
+      this.setXxdwAddEditTitle('新增学校单位')
+      Vue.paperDialog(this)
     },
 
-    'xzwh:buttonlist:del': function() {
-      var checked = $(this.$refs.table.getTable()).emapdatatable('checkedRecords')
+    'xxdwwh:buttonlist:del': function() {
+      var checked = this.$refs.table.checkedRecords()
       if (checked.length === 0) {
         Vue.tipPop(this, 'noselect')
         return
@@ -45,40 +53,45 @@ export default {
       Vue.tipDialog(this, 'del')
     },
 
-    'xzwh:search:top': function() {
+    'xxdwwh:search:top': function() {
       var keyword = this.$refs.simplesearch.keyword
       this.$refs.table.reload({ searchContent: keyword })
     },
 
-    'xzwh:table:edit': function(row) {
-      Vue.propertyDialog(this)
+    'xxdwwh:table:edit': function(row) {
+      this.setXxdwAddEditTitle('编辑学校单位')
+      Vue.paperDialog(this)
       this.$broadcast('addedit:setvalue', row)
     },
 
-    'xzwh:table:del': function() {
-      Vue.tipDialog(this, 'del')
+    'xxdwwh:table:del': function(row) {
+      service.departDelete([row.wid]).then(({ data }) => {
+        Vue.tipPop(this, 'del_success')
+        this.$refs.table.reload()
+      })
     },
-    'xzwh:tipdialog:del': function() {
+    'xxdwwh:tipdialog:del': function() {
       var checked = this.$refs.table.checkedRecords()
+      console.log(checked)
       var wids = []
 
       checked.forEach((item) => {
         wids.push(item.wid)
       })
 
-      service.xzDelete(wids).then(({ data }) => {
+      service.departDelete(wids).then(({ data }) => {
         Vue.tipPop(this, 'del_success')
         this.$refs.table.reload()
       })
     },
-    'xzwh:buttonlist:import': function() {
+    'xxdwwh:buttonlist:import': function() {
       Vue.paperDialog(this)
     }
   }
 }
 </script>
 <style type="text/css">
-.xzwh-card-value {
+.xxdwwh-card-value {
   width: 106px;
   overflow: hidden;
   white-space: nowrap;
@@ -86,11 +99,11 @@ export default {
   vertical-align: bottom;
 }
 
-.xzwh-card .sc-panel-thing-1-container {
+.xxdwwh-card .sc-panel-thing-1-container {
   padding-right: 4px;
 }
 
-.xzwh-card .sc-panel-thing-1-title {
+.xxdwwh-card .sc-panel-thing-1-title {
   width: 158px;
   overflow: hidden;
   white-space: nowrap;

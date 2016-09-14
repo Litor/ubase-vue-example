@@ -1,31 +1,42 @@
-import service from './xqwh.service'
+import service from './zywh.service'
 const SET_TITLE = 'SET_TITLE'
 
 // init state
 export const state = {
-  title: '校区维护',
+  paperDialog: {
+    currentView: 'zyaddedit',
+    title: '编辑'
+  },
   propertyDialog: {
-    currentView: 'xqwhaddedit',
-    okEvent: 'xqwhaddedit:save',
-    title: '查看详情'
+    currentView: 'zydetail',
+    okEvent: 'addedit:save',
+    title: '查看详情',
+    footerShow: false
+  },
+  dialog: {
+    currentView: 'zyaddedit',
+    title: '测试对话框'
   },
   buttonList: [{
     text: '新增',
-    clickEvent: 'xqwh:buttonlist:add',
+    clickEvent: 'zywh:buttonlist:add',
     primary: true
   }, {
     text: '删除',
-    clickEvent: 'xqwh:buttonlist:del'
+    clickEvent: 'zywh:buttonlist:del'
+  }, {
+    text: '导入',
+    clickEvent: 'zywh:buttonlist:import'
   }],
   simpleSearch: {
     placeholder: '请输入',
-    searchEvent: 'xqwh:search:top'
+    searchEvent: 'zywh:search:top'
   },
   tipDialog: {
     del: {
       type: 'warning',
       title: '您选择需要删除的信息吗？',
-      okEvent: 'xqwh:tipdialog:del'
+      okEvent: 'zywh:tipdialog:del'
     }
   },
   tipPop: {
@@ -52,29 +63,24 @@ export const state = {
           return value ? '有效' : '无效'
         }
       }
-    }, {
-      colField: 'name',
-      type: 'tpl',
-      width: 300,
-      column: {
-        cellsRenderer: function(row, column, value, rowData) {
-          return '<a href="#/bzxq" target="_blank" data-action="save-id" data-wid="' + rowData.WID + '">' + value + '</span>'
-        }
-      }
     }],
     checkable: true,
     sortable: true,
     columnsReorder: true,
     operations: {
       title: '操作',
-      width: 100,
+      width: 150,
       items: [{
         title: '编辑',
-        name: 'xqwh:table:edit',
+        name: 'zywh:table:edit',
+        type: 'link'
+      }, {
+        title: '详情',
+        name: 'zywh:table:detail',
         type: 'link'
       }, {
         title: '删除',
-        name: 'xqwh:table:del',
+        name: 'zywh:table:del',
         type: 'link'
       }]
     }

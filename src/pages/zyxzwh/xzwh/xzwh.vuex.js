@@ -1,31 +1,34 @@
-import service from './xqwh.service'
+import service from './xzwh.service'
 const SET_TITLE = 'SET_TITLE'
 
 // init state
 export const state = {
-  title: '校区维护',
+  paperDialog: {
+    currentView: 'xzaddedit',
+    title: 'dkd'
+  },
   propertyDialog: {
-    currentView: 'xqwhaddedit',
-    okEvent: 'xqwhaddedit:save',
+    currentView: 'xzaddedit',
+    okEvent: 'addedit:save',
     title: '查看详情'
   },
   buttonList: [{
     text: '新增',
-    clickEvent: 'xqwh:buttonlist:add',
+    clickEvent: 'xzwh:buttonlist:add',
     primary: true
   }, {
     text: '删除',
-    clickEvent: 'xqwh:buttonlist:del'
+    clickEvent: 'xzwh:buttonlist:del'
   }],
   simpleSearch: {
     placeholder: '请输入',
-    searchEvent: 'xqwh:search:top'
+    searchEvent: 'xzwh:search:top'
   },
   tipDialog: {
     del: {
       type: 'warning',
       title: '您选择需要删除的信息吗？',
-      okEvent: 'xqwh:tipdialog:del'
+      okEvent: 'zywh:tipdialog:del'
     }
   },
   tipPop: {
@@ -40,10 +43,16 @@ export const state = {
   },
   emapDatatable: {
     pagePath: service.api.getList_meta,
+    template: require('./cardTpl.html'),
+    sortable: true,
     url: service.api.getList,
     action: service.api.getList_action,
     method: 'POST',
     customColumns: [{
+      colIndex: '0',
+      type: 'checkbox',
+      pinned: true
+    }, {
       colField: 'status',
       type: 'tpl',
       width: 50,
@@ -53,31 +62,17 @@ export const state = {
         }
       }
     }, {
-      colField: 'name',
+      colIndex: 'last',
       type: 'tpl',
       width: 300,
       column: {
+        text: '操作',
         cellsRenderer: function(row, column, value, rowData) {
-          return '<a href="#/bzxq" target="_blank" data-action="save-id" data-wid="' + rowData.WID + '">' + value + '</span>'
+          return "<a href='javascript:void(0)' data-name='xzwh:table:edit'  class='opt-button' style='padding: 0 5px;' data-row=" + JSON.stringify(rowData) + ">编辑</a>"
         }
       }
     }],
-    checkable: true,
-    sortable: true,
     columnsReorder: true,
-    operations: {
-      title: '操作',
-      width: 100,
-      items: [{
-        title: '编辑',
-        name: 'xqwh:table:edit',
-        type: 'link'
-      }, {
-        title: '删除',
-        name: 'xqwh:table:del',
-        type: 'link'
-      }]
-    }
   }
 }
 

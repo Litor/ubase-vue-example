@@ -10,14 +10,14 @@
 </style>
 <script>
 export default {
-  props: ['name'],
+  props: ['name', 'buttonList'],
   data: function() {
-    return {
-      buttonList: []
-    }
+    return {}
   },
   created() {
-    this.buttonList = this.$parent.pageopt[this.name ? this.name : 'buttonList']
+    if (!this.buttonList) {
+      this.buttonList = this.$parent.pageopt[this.name ? this.name : 'buttonList']
+    }
   },
   methods: {
     click(click) {

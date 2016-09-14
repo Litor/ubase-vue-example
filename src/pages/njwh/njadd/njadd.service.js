@@ -1,4 +1,4 @@
-let app = 'campus'
+let app = 'grade'
 
 export default {
   api: {
@@ -12,7 +12,7 @@ export default {
     addOrEdit: `/jcsj-apps-web/${app}/addOrEdit`,
   },
 
-  campusDelete(wids) {
-    return Vue.http.post(this.api.delete, { wids: wids })
+  gradeAddOrEdit(grade) {
+    return Vue.http.post(this.api.addOrEdit, { grade: grade })
   }
 }

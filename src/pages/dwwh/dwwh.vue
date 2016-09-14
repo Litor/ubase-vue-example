@@ -10,12 +10,12 @@
 import tabs from 'components/tabs.vue'
 
 export default {
-  components: { tabs },
+  components: { tabs},
 
   vuex: {
     getters: {
       pageopt: function(state) {
-        return state.zyxzwh
+        return state.dwwh
       }
     }
   }

@@ -1,4 +1,4 @@
-let app = 'campus'
+let app = 'departCategory'
 
 export default {
   api: {
@@ -10,9 +10,5 @@ export default {
     getList: `/jcsj-apps-web/${app}/getList`,
     delete: `/jcsj-apps-web/${app}/delete`,
     addOrEdit: `/jcsj-apps-web/${app}/addOrEdit`,
-  },
-
-  campusDelete(wids) {
-    return Vue.http.post(this.api.delete, { wids: wids })
   }
 }

@@ -1,15 +1,10 @@
 <template>
-  <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
-    <section>
-      <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-      <button-list :button-list="pageopt.buttonList"></button-list>
-      <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
-    </section>
-  </article>
+  <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
+  <button-list :button-list="pageopt.buttonList"></button-list>
+  <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
 </template>
 <script>
-import service from './xqwh.service'
+import service from './dwlbwh.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 
 export default {
@@ -18,18 +13,18 @@ export default {
   vuex: {
     getters: {
       pageopt: function(state) {
-        return state.xqwh
+        return state.dwlbwh
       }
-    }
+    },
   },
 
   events: {
-    'xqwh:buttonlist:add': function() {
-      this.pageopt.propertyDialog.title = '新增校区'
+    'dwlbwh:buttonlist:add': function() {
+      this.pageopt.propertyDialog.title = '新增单位类别'
       Vue.propertyDialog(this)
     },
 
-    'xqwh:buttonlist:del': function() {
+    'dwlbwh:buttonlist:del': function() {
       var checked = this.$refs.table.checkedRecords()
       if (checked.length === 0) {
         Vue.tipPop(this, 'noselect')
@@ -38,24 +33,24 @@ export default {
       Vue.tipDialog(this, 'del')
     },
 
-    'xqwh:search:top': function() {
+    'dwlbwh:search:top': function() {
       var keyword = this.$refs.simplesearch.keyword
       this.$refs.table.reload({ searchContent: keyword })
     },
 
-    'xqwh:table:edit': function(row) {
-      this.pageopt.propertyDialog.title = '编辑校区信息'
+    'dwlbwh:table:edit': function(row) {
+      this.pageopt.propertyDialog.title = '编辑单位类别'
       Vue.propertyDialog(this)
-      this.$broadcast('xqwhaddedit:setvalue', row)
+      this.$broadcast('dwlbaddedit:setvalue', row)
     },
 
-    'xqwh:table:del': function(row) {
-      service.campusDelete([row.wid]).then(({ data }) => {
+    'dwlbwh:table:del': function(row) {
+      service.departCategoryDelete([row.wid]).then(({ data }) => {
         Vue.tipPop(this, 'del_success')
         this.$refs.table.reload()
       })
     },
-    'xqwh:tipdialog:del': function() {
+    'dwlbwh:tipdialog:del': function() {
       var checked = this.$refs.table.checkedRecords()
       console.log(checked)
       var wids = []
@@ -64,11 +59,12 @@ export default {
         wids.push(item.wid)
       })
 
-      service.campusDelete(wids).then(({ data }) => {
+      service.departCategoryDelete(wids).then(({ data }) => {
         Vue.tipPop(this, 'del_success')
         this.$refs.table.reload()
       })
     }
+
   }
 }
 </script>

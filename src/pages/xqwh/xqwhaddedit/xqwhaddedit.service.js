@@ -12,7 +12,8 @@ export default {
     addOrEdit: `/jcsj-apps-web/${app}/addOrEdit`,
   },
 
-  campusDelete(wids) {
-    return Vue.http.post(this.api.delete, { wids: wids })
+  campusAddOrEdit(info) {
+    return Vue.http.post(this.api.addOrEdit, { schoolAreaInfo: info })
   }
+
 }
