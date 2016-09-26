@@ -1,0 +1,1 @@
+{"models":[{"name":"schoolCalendar_addDateEvent","appName":"","modelName":"增加日期事件","url":"/jcsj-apps-web/schoolCalendar/addDateEvent","controls":[{"name":"beginTime","dataType":"integer","caption":"选择日期范围","xtype":"date-local"},{"name":"endTime","dataType":"integer","caption":"","xtype":"date-local"},{"name":"remarks","dataType":"string","caption":"备注","xtype":"textarea"}]}]}

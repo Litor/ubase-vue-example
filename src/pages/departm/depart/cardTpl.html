@@ -1,0 +1,20 @@
+<div class="sc-panel-thingNoImg-1 bh-mh-8 bh-mv-8 depart-card">
+  <div class="sc-panel-thingNoImg-1-container bh-animate-all bh-animate-fast">
+    <div class="sc-panel-thingNoImg-1-description">
+      <div class="sc-panel-thingNoImg-1-header">
+        <div class="sc-panel-thingNoImg-1-title">{{row.name}}</div>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('depart.card.admin')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue depart-card-value">{{row.admin}}</div>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('depart.card.parentDept')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue depart-card-value">{{row.parentDept}}</div>
+      </div>
+    </div>
+    <div class="sc-panel-thingNoImg-1-operate bh-animate-bottom bh-animate-fast">
+      <span class="bh-mh-4 opt-button" data-event="depart:card:edit" data-id="{{row.wid}}">{{$t('depart.card.edit')}}</span> | <span class="bh-mh-4 opt-button">{{$t('depart.card.del')}}</span> | <span class="bh-mh-4 opt-button">{{$t('depart.card.detail')}}</span>
+    </div>
+  </div>
+</div>

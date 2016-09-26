@@ -1,0 +1,21 @@
+<div class="sc-panel-thingNoImg-1 bh-mh-8 bh-mv-8 majorDirection-card">
+  <div class="sc-panel-thingNoImg-1-container bh-animate-all bh-animate-fast">
+    <div class="sc-panel-thingNoImg-1-description">
+      <div class="sc-panel-thingNoImg-1-header">
+        <div class="sc-panel-thingNoImg-1-title">{{row.majorName}}</div>
+        <a href="javascript:void(0);" class="bh-tag bh-tag-{{row.status?'success':'warning'}}">{{row.status?'已启用':'未启用'}}</a>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('majorDirection.card.admin')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue majorDirection-card-value">{{row.admin}}</div>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('majorDirection.card.parentDept')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue majorDirection-card-value">{{row.parentDept}}</div>
+      </div>
+    </div>
+    <div class="sc-panel-thingNoImg-1-operate bh-animate-bottom bh-animate-fast">
+      <span class="bh-mh-4 opt-button" data-event="majorDirection:card:edit" data-id="{{row.wid}}">{{$t('majorDirection.card.edit')}}</span> | <span class="bh-mh-4 opt-button" data-event="majorDirection:card:del">{{$t('majorDirection.card.del')}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="sc-panel-thingNoImg-1 bh-mh-8 bh-mv-8 eduSys-card">
+  <div class="sc-panel-thingNoImg-1-container bh-animate-all bh-animate-fast">
+    <div class="sc-panel-thingNoImg-1-description">
+      <div class="sc-panel-thingNoImg-1-header">
+        <div class="sc-panel-thingNoImg-1-title">{{row.name}}</div>
+        <a href="javascript:void(0);" class="bh-tag bh-tag-warning">{{row.status?'已启用':'未启用'}}</a>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('eduSys.card.stuYears')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue eduSys-card-value">{{row.stuYears}}</div>
+      </div>
+      <div class="sc-panel-thingNoImg-1-subject">
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('eduSys.card.itemSort')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue eduSys-card-value">{{row.itemSort}}</div>
+      </div>
+    </div>
+    <div class="sc-panel-thingNoImg-1-operate bh-animate-bottom bh-animate-fast">
+      <span class="bh-mh-4 opt-button" data-event="eduSys:card:edit" data-id="{{row.wid}}">{{$t('eduSys.card.edit')}}</span> | <span class="bh-mh-4 opt-button">{{$t('eduSys.card.del')}}</span> | <span class="bh-mh-4 opt-button">{{$t('eduSys.card.detail')}}</span>
+    </div>
+  </div>
+</div>
