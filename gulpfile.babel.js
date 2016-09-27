@@ -30,7 +30,7 @@ gulp.task('webpack', () =>
   .pipe(errorHandler())
   .pipe(named())
   .pipe(webpackGulp(configWebpack(path, webpack, userConfig)))
-  .pipe(gulp.dest(dest))
+  .pipe(gulp.dest(dest + '/webapp'))
   .pipe(connect.reload())
 );
 
