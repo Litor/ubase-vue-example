@@ -15,20 +15,16 @@ export const state = {
     footerShow: false
   },
   dialog: {
-    currentView: 'gradeMajor',
-    okEvent: '_SUBPAGE_SAVE_EVENT_',
+    width: '800px',
+    height: '550px',
+    currentView: 'gradeAdd',
+    okEvent: 'gradeAdd:save',
     title: Vue.t('gradeMajor.dialog.title')
   },
   buttonList: [{
-    text: Vue.t('gradeMajor.buttonList.add'),
-    clickEvent: 'gradeMajor:buttonlist:add',
+    text: Vue.t('gradeMajor.buttonList.addGrade'),
+    clickEvent: 'gradeMajor:buttonlist:addGrade',
     primary: true
-  }, {
-    text: Vue.t('gradeMajor.buttonList.del'),
-    clickEvent: 'gradeMajor:buttonlist:del'
-  }, {
-    text: Vue.t('gradeMajor.buttonList.import'),
-    clickEvent: 'gradeMajor:buttonlist:import'
   }],
   simpleSearch: {
     placeholder: Vue.t('gradeMajor.simpleSearch.placeholder'),
@@ -53,9 +49,9 @@ export const state = {
     }
   },
   emapCard: {
-    pagePath: service.api.getList_meta,
-    url: service.api.getList,
-    action: service.api.getList_action,
+    pagePath: service.api.getGradeMajorNumList_meta,
+    url: service.api.getGradeMajorNumList,
+    action: service.api.getGradeMajorNumList_action,
     template: require('./cardTpl.html')
   }
 };

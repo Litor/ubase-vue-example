@@ -1,0 +1,175 @@
+.cal-cld_dbg{
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    font: 150px/150px Arial;
+    color: #cfeff1;
+    z-index: 20;
+    width: 48%;
+    text-align: center;
+}
+.calendar-wrap .h{
+    height: 23px;
+    text-align: center;
+    font: bold 16px/20px tahoma,arial,sans-serif;
+    padding: 8px 12px;
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    margin:4px;
+}
+.calendar{
+    position: relative;
+    z-index: 1;
+    margin-left: -1px;
+    width: 100%;
+    overflow: hidden;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+.calendar table {
+    border-collapse: collapse;
+    z-index: 40;
+    padding-left: 20px;
+    position: relative;
+    width:97%;
+}
+.calendar td {
+    position: relative;
+    height: 25px;
+    font: bold 12px/25px tahoma,arial,sans-serif;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0!important;
+}
+.calendar .weekend {
+    color: #c60b02;
+}
+
+.calendar .zc{
+    width: 19px;
+    height: 19px;
+    background-color: #5ABCC2;
+    border-radius: 10px;
+    line-height: 19px;
+    color: white;
+    position: absolute;
+    top: 3px;
+    font-size: 12px;
+}
+.cal-td-over{
+    background-color: #00afbc;
+    color: #fff;
+}
+.calendar-wrap{
+    box-sizing:border-box;
+    float: left;
+    width:50%;
+    
+    padding: 5px;
+    position: relative;
+    height: 320px;
+    
+}
+.real-wrap{
+    margin: 4px;
+    border: 1px solid #ddd;
+    height: 310px
+}
+.cal-topside{
+    width: 100%;
+}
+.cal-week-info{
+    font-size: 12px;
+    color: #5F5A5A;
+    margin-top: 4px;
+}
+.cal-week-tip{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #5ABCC2;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-family: tahoma,arial,sans-serif;
+    font-weight: bold;
+}
+.cal-bottomside{
+    width: 100%;
+    padding-left: 8px;
+    color: #5F5A5A;
+    font-size: 13px;
+}
+.cal-bottomside:after{
+    clear:both;
+    content:"";
+    display:block;
+}
+.cal-day-tip{
+    width:10px;
+    height:10px;
+    background-color: #5ABCC2;
+    display: inline-block;
+}
+.cal-week-th{
+    width:250px;font-weight: bold;font-size: 16px;
+}
+.f-red{
+    display: inline-block;
+    width: 90%;
+    height: 20px;
+    line-height: 20px;
+    background-color:#C8A5FD;
+    margin: 2px;
+}
+.hdxx-del{
+    width: 14px;
+    height: 14px;
+    background: url("../images/close.png") no-repeat 6px -16px;
+    cursor:pointer;
+    display: none;
+}
+.cal-month-last{
+    width: 30px;
+    height: 30px;
+    float:left;
+    background: url("../images/directional_left.png");
+    cursor:pointer;
+}
+.cal-month-next{
+    width: 30px;
+    height: 30px;
+    float:right;
+    background: url("../images/directional_right.png");
+    cursor:pointer;
+    margin-top:-20px;
+}
+.cal-month-zc{
+    width:20px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+.cal-month-zcl{
+    width:50%;
+    font-weight: bold;
+    font-size: 16px;
+    color:#726F6F;      
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+.cal-month-w {
+    font-weight: 400;
+    border-bottom: 1px solid #ccc;
+    width: 6.5%;
+    height: 27px;
+    text-align: center;
+    vertical-align: middle;
+}
+.hdxx-del:hover{background: url("../images/close.png") no-repeat -19px 7px;}
+.hdxx-list{padding-top: 4px;width:50%;float:left;height:24px;}

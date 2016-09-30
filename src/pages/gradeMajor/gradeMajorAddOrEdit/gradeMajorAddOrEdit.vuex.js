@@ -29,6 +29,9 @@ export const state = {
   }, {
     text: Vue.t('gradeMajorAddOrEdit.buttonList.import'),
     clickEvent: 'gradeMajorAddOrEdit:buttonlist:import'
+  }, {
+    text: Vue.t('gradeMajorAddOrEdit.buttonList.export'),
+    clickEvent: 'gradeMajorAddOrEdit:buttonlist:export'
   }],
   simpleSearch: {
     placeholder: Vue.t('gradeMajorAddOrEdit.simpleSearch.placeholder'),
@@ -70,24 +73,7 @@ export const state = {
     }],
     checkable: true,
     sortable: true,
-    columnsReorder: true,
-    operations: {
-      title: Vue.t('gradeMajorAddOrEdit.grid.opt_title'),
-      width: 150,
-      items: [{
-        title: Vue.t('gradeMajorAddOrEdit.grid.opt_edit'),
-        name: 'gradeMajorAddOrEdit:grid:edit',
-        type: 'link'
-      }, {
-        title: Vue.t('gradeMajorAddOrEdit.grid.opt_detail'),
-        name: 'gradeMajorAddOrEdit:grid:detail',
-        type: 'link'
-      }, {
-        title: Vue.t('gradeMajorAddOrEdit.grid.opt_delete'),
-        name: 'gradeMajorAddOrEdit:grid:del',
-        type: 'link'
-      }]
-    }
+    columnsReorder: true
   }
 };
 

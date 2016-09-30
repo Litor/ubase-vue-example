@@ -29,8 +29,9 @@ export default {
     var self = this;
     $(this.$el).on('click', '.opt-button', function(e) {
       var rowId = $(this).attr('data-id');
+      var rowName = $(this).attr('data-name');
       var event = $(this).attr('data-event');
-      self.$dispatch(event, rowId);
+      self.$dispatch(event, rowId, rowName);
     })
   },
 
@@ -40,16 +41,23 @@ export default {
       this.$refs.table.reload({ searchContent: keyword })
     },
 
-    'gradeMajor:buttonlist:add': function() {
+    'gradeMajor:buttonlist:addGrade': function() {
+      this.pageopt.dialog.currentView = 'gradeAdd'
       Vue.dialog(this)
     },
 
-    'gradeMajor:card:edit':function(id){
+    'gradeMajor:card:edit': function(id) {
       alert(id)
     },
 
-    'gradeMajor:card:setting':function(){
+    'gradeMajor:card:setting': function(id, name) {
+      this.pageopt.paperDialog.title = name
+      this.pageopt.paperDialog.currentView = 'gradeMajorAddOrEdit'
       Vue.paperDialog(this)
+    },
+
+    'gradeMajor:card:copy': function() {
+      Vue.dialog(this)
     }
   }
 }

@@ -1,5 +1,5 @@
 var cn = {
-  title: '标题',
+  title: '年度专业',
   paperDialog: {
     add_title: '纸质弹框新增标题',
     edit_title: '纸质弹框编辑标题'
@@ -13,9 +13,7 @@ var cn = {
     title: '对话框标题'
   },
   buttonList: {
-    add: '新增',
-    del: '删除',
-    import: '导入'
+    addGrade: '新增年级'
   },
   simpleSearch: {
     placeholder: '请输入',
@@ -30,10 +28,8 @@ var cn = {
   },
   card: {
     setting: '设置',
-    parentDept: '所属单位',
-    edit: '编辑',
-    detail: '查看详情',
-    del: '删除'
+    copy: '复制',
+    majroNum: '专业数量'
   }
 };
 

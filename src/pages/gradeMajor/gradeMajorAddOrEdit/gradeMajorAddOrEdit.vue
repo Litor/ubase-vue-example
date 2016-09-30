@@ -37,7 +37,8 @@ export default {
     },
 
     'gradeMajorAddOrEdit:buttonlist:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
+      console.log(this.$refs.grid)
+      var checked = this.$refs.grid.getGrid().checkedRecords()
       if (checked.length === 0) {
         Vue.tipPop(this, 'noselect')
         return
@@ -54,6 +55,10 @@ export default {
       Vue.dialog(this)
     },
 
+    'gradeMajorAddOrEdit:buttonlist:export': function() {
+      console.log('export')
+    },
+
     'gradeMajorAddOrEdit:grid:edit': function(row) {
       this.pageopt.paperDialog.title = Vue.t('gradeMajorAddOrEdit.paperDialog.edit_title')
       Vue.paperDialog(this)
@@ -68,7 +73,7 @@ export default {
     },
 
     'gradeMajorAddOrEdit:tipdialog:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
+      var checked = this.$refs.grid.getGrid().checkedRecords()
       var wids = []
 
       checked.forEach((item) => {
@@ -80,7 +85,7 @@ export default {
         this.$refs.grid.reload()
       })
     }
-    
+
   }
 }
 </script>

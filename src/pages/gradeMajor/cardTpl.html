@@ -5,16 +5,12 @@
         <div class="sc-panel-thingNoImg-1-title">{{row.name}}</div>
       </div>
       <div class="sc-panel-thingNoImg-1-subject">
-        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('gradeMajor.card.admin')}}</div>
-        <div class="sc-panel-thingNoImg-1-subjectValue gradeMajor-card-value">{{row.admin}}</div>
-      </div>
-      <div class="sc-panel-thingNoImg-1-subject">
-        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('gradeMajor.card.parentDept')}}</div>
-        <div class="sc-panel-thingNoImg-1-subjectValue gradeMajor-card-value">{{row.parentDept}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectKey sc-width-50">{{$t('gradeMajor.card.majroNum')}}</div>
+        <div class="sc-panel-thingNoImg-1-subjectValue gradeMajor-card-value">{{row.majroNum}}</div>
       </div>
     </div>
     <div class="sc-panel-thingNoImg-1-operate bh-animate-bottom bh-animate-fast">
-      <span class="bh-mh-4 opt-button" data-event="gradeMajor:card:setting" data-id="{{row.wid}}">{{$t('gradeMajor.card.setting')}}</span> | <span class="bh-mh-4 opt-button" data-event="gradeMajor:card:del">{{$t('gradeMajor.card.del')}}</span> | <span class="bh-mh-4 opt-button" data-event="gradeMajor:card:detail">{{$t('gradeMajor.card.detail')}}</span>
+      <span class="bh-mh-4 opt-button" data-event="gradeMajor:card:setting" data-id="{{row.wid}}" data-name="{{row.name}}">{{$t('gradeMajor.card.setting')}}</span> | <span class="bh-mh-4 opt-button" data-event="gradeMajor:card:copy">{{$t('gradeMajor.card.copy')}}</span>
     </div>
   </div>
 </div>

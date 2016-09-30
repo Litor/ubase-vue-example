@@ -47,6 +47,7 @@ export const state = {
       content: Vue.t('campus.tipPop.del_success')
     }
   },
+  willDeleteWids: [],
   emapDatatable: {
     pagePath: service.api.getList_meta,
     url: service.api.getList,

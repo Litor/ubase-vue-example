@@ -39,6 +39,7 @@ export default {
 
     'campus:buttonlist:del': function() {
       var checked = this.$refs.table.checkedRecords()
+      this.pageopt.willDeleteWids = checked
       if (checked.length === 0) {
         Vue.tipPop(this, 'noselect')
         return
@@ -58,14 +59,12 @@ export default {
     },
 
     'campus:table:del': function(row) {
-      service.delete([row.wid]).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
-        this.$refs.table.reload()
-      })
+      this.pageopt.willDeleteWids = [row.wid]
+      Vue.tipDialog(this, 'del')
     },
 
     'campus:tipdialog:del': function() {
-      var checked = this.$refs.table.checkedRecords()
+      var checked = this.pageopt.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {

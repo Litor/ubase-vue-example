@@ -13,9 +13,10 @@ var cn = {
     title: '对话框标题'
   },
   buttonList: {
-    add: '新增',
+    add: '添加',
     del: '删除',
-    import: '导入'
+    import: '导入',
+    export: '导出'
   },
   simpleSearch: {
     placeholder: '请输入',
@@ -35,11 +36,8 @@ var cn = {
     opt_delete: '删除'
   },
   card: {
-    admin: '负责人',
-    parentDept: '所属单位',
-    edit: '编辑',
-    detail: '查看详情',
-    del: '删除'
+    depart: '院系',
+    eduSysCode: '学制'
   }
 
 };
