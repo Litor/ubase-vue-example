@@ -22,6 +22,15 @@ export default {
     }
   },
 
+  ready() {
+    var self = this;
+    $(this.$el).on('click', '.opt-button', function(e) {
+      var row = $(this).data('row');
+      var event = $(this).attr('data-event');
+      self.$dispatch(event, row);
+    })
+  },
+
   events: {
     'major:search:top': function() {
       var keyword = this.$refs.simplesearch.keyword
@@ -37,10 +46,10 @@ export default {
     'major:buttonlist:del': function() {
       var checked = this.$refs.grid.checkedRecords()
       if (checked.length === 0) {
-        Vue.tipPop(this, 'noselect')
+        Vue.tip(this, 'noselect')
         return
       }
-      Vue.tipDialog(this, 'del')
+      Vue.toast(this, 'del')
     },
 
     'major:grid:detail': function(row) {
@@ -66,7 +75,7 @@ export default {
 
     'major:grid:del': function(row) {
       service.delete([row.wid]).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.grid.reload()
       })
     },
@@ -86,9 +95,13 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.grid.reload()
       })
+    },
+
+    'major:card:edit': function(row) {
+      console.log(row)
     }
 
   }

@@ -28,10 +28,9 @@ export default {
   ready() {
     var self = this;
     $(this.$el).on('click', '.opt-button', function(e) {
-      var rowId = $(this).attr('data-id');
-      var rowName = $(this).attr('data-name');
+      var row = $(this).data('row');
       var event = $(this).attr('data-event');
-      self.$dispatch(event, rowId, rowName);
+      self.$dispatch(event, row);
     })
   },
 
@@ -46,12 +45,12 @@ export default {
       Vue.dialog(this)
     },
 
-    'gradeMajor:card:edit': function(id) {
-      alert(id)
+    'gradeMajor:card:edit': function(row) {
+      console.log(row)
     },
 
-    'gradeMajor:card:setting': function(id, name) {
-      this.pageopt.paperDialog.title = name
+    'gradeMajor:card:setting': function(row) {
+      this.pageopt.paperDialog.title = row.name
       this.pageopt.paperDialog.currentView = 'gradeMajorAddOrEdit'
       Vue.paperDialog(this)
     },

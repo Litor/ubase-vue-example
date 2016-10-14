@@ -1,5 +1,4 @@
 import service from './eduSys.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -30,21 +29,21 @@ export const state = {
     text: Vue.t('eduSys.simpleSearch.text'),
     searchEvent: 'eduSys:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('eduSys.tipDialog.del'),
+      title: Vue.t('eduSys.toast.del'),
       okEvent: 'eduSys:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('eduSys.tipPop.noselect')
+      content: Vue.t('eduSys.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('eduSys.tipPop.del_success')
+      content: Vue.t('eduSys.tip.del_success')
     }
   },
   emapGrid: {
@@ -82,14 +81,7 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
-
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

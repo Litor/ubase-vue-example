@@ -1,5 +1,4 @@
 import service from './campus.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -30,21 +29,21 @@ export const state = {
     text: Vue.t('campus.simpleSearch.text'),
     searchEvent: 'campus:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('campus.tipDialog.del'),
+      title: Vue.t('campus.toast.del'),
       okEvent: 'campus:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('campus.tipPop.noselect')
+      content: Vue.t('campus.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('campus.tipPop.del_success')
+      content: Vue.t('campus.tip.del_success')
     }
   },
   willDeleteWids: [],
@@ -82,14 +81,7 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
-
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

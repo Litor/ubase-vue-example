@@ -1,6 +1,4 @@
 import service from './major.service';
-const SET_TITLE = 'SET_TITLE';
-
 // init state
 export const state = {
   title: Vue.t('major.title'),
@@ -37,21 +35,21 @@ export const state = {
     text: Vue.t('major.simpleSearch.text'),
     searchEvent: 'major:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('major.tipDialog.del'),
+      title: Vue.t('major.toast.del'),
       okEvent: 'major:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('major.tipPop.noselect')
+      content: Vue.t('major.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('major.tipPop.del_success')
+      content: Vue.t('major.tip.del_success')
     }
   },
   emapGrid: {
@@ -93,14 +91,8 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
 
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

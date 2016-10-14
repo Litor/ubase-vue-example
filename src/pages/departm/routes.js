@@ -1,7 +1,7 @@
-import departm from './departm.vue';
+import departTab from './departTab/departTab.vue';
 
 export default {
   '/': {
-    component: departm
+    component: departTab
   }
-}
+};

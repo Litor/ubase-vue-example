@@ -1,5 +1,4 @@
 import service from './majorDirection.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -31,21 +30,21 @@ export const state = {
     text: Vue.t('majorDirection.simpleSearch.text'),
     searchEvent: 'majorDirection:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('majorDirection.tipDialog.del'),
+      title: Vue.t('majorDirection.toast.del'),
       okEvent: 'majorDirection:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('majorDirection.tipPop.noselect')
+      content: Vue.t('majorDirection.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('majorDirection.tipPop.del_success')
+      content: Vue.t('majorDirection.tip.del_success')
     }
   },
   emapCard: {
@@ -57,14 +56,7 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
-
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

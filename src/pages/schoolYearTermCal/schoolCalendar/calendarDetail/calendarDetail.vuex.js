@@ -1,5 +1,4 @@
 import service from './calendarDetail.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -18,33 +17,44 @@ export const state = {
     currentView: 'calendarDetail',
     title: Vue.t('calendarDetail.dialog.title')
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('calendarDetail.tipDialog.del'),
+      title: Vue.t('calendarDetail.toast.del'),
       okEvent: 'calendarDetail:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('calendarDetail.tipPop.noselect')
+      content: Vue.t('calendarDetail.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('calendarDetail.tipPop.del_success')
+      content: Vue.t('calendarDetail.tip.del_success')
     }
-  }
-};
+  },
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
+  year: 2016,
+  month: 9,
+
+  calendarProfile: {},
+  calendarDetail: {}
 };
 
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
+};
+
+export const getCalendarProfile = ({ actions, dispatch }, wid) => {
+  return service.getByWid(wid).then((res) => {
+    state.calendarProfile = res || {};
+  });
+};
+
+export const getCalendarDetail = ({ actions, dispatch }, wid) => {
+  service.getDateEventByCalendarWid(wid).then((res) => {
+    state.calendarDetail = res || {};
+  });
 };

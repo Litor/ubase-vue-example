@@ -1,5 +1,4 @@
 import service from './gradeMajor.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -31,21 +30,21 @@ export const state = {
     text: Vue.t('gradeMajor.simpleSearch.text'),
     searchEvent: 'gradeMajor:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('gradeMajor.tipDialog.del'),
+      title: Vue.t('gradeMajor.toast.del'),
       okEvent: 'gradeMajor:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('gradeMajor.tipPop.noselect')
+      content: Vue.t('gradeMajor.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('gradeMajor.tipPop.del_success')
+      content: Vue.t('gradeMajor.tip.del_success')
     }
   },
   emapCard: {
@@ -56,14 +55,7 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
-
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

@@ -1,5 +1,4 @@
 import service from './schoolCalendarAddOrEdit.service';
-const FORM_READYONLY = 'FORM_READYONLY';
 
 // init state
 export const state = {
@@ -11,23 +10,16 @@ export const state = {
     readonly: false,
     model: 'v'
   },
-  tipPop: {
+  tip: {
     save_success: {
       state: 'success',
-      content: Vue.t('schoolCalendarAddOrEdit.tipPop.save_success')
+      content: Vue.t('schoolCalendarAddOrEdit.tip.save_success')
     }
   },
   outline: false
 };
 
-// mutations
-export const mutations = {
-  [FORM_READYONLY](state, data) {
-    state.options.readonly = data.readonly;
-  }
-};
-
 // actions
 export const setFormReadOnly = ({ actions, dispatch }, readonly) => {
-  return dispatch(FORM_READYONLY, { readonly: readonly });
+  state.options.readonly = readonly;
 };

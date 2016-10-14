@@ -27,9 +27,9 @@ export default {
     var self = this;
     
     $(this.$el).on('click', '.opt-button', function(e) {
-      var rowId = $(this).attr('data-id');
+      var row = $(this).data('row');
       var event = $(this).attr('data-event');
-      self.$dispatch(event, rowId);
+      self.$dispatch(event, row);
     })
   },
 
@@ -43,8 +43,8 @@ export default {
       Vue.dialog(this)
     },
 
-    'majorDirection:card:edit':function(id){
-      alert(id)
+    'majorDirection:card:edit':function(row){
+      console.log(row)
     },
 
     'majorDirection:card:del':function(){

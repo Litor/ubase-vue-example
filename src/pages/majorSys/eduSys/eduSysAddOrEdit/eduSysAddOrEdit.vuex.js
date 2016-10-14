@@ -1,5 +1,4 @@
 import service from './eduSysAddOrEdit.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
@@ -11,23 +10,17 @@ export const state = {
     readonly: false,
     model: 'v'
   },
-  tipPop: {
+  tip: {
     save_success: {
       state: 'success',
-      content: Vue.t('eduSysAddOrEdit.tipPop.save_success')
+      content: Vue.t('eduSysAddOrEdit.tip.save_success')
     }
   },
   outline: false
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
 
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

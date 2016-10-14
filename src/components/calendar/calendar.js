@@ -29,6 +29,13 @@ var sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921,
 var nStr1 = new Array('日', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十');
 var nStr2 = new Array('初', '十', '廿', '卅', '　');
 var monthName = new Array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC');
+var CnDayStr = new Array('零',
+  '初一', '初二', '初三', '初四', '初五',
+  '初六', '初七', '初八', '初九', '初十',
+  '十一', '十二', '十三', '十四', '十五',
+  '十六', '十七', '十八', '十九', '二十',
+  '廿一', '廿二', '廿三', '廿四', '廿五',
+  '廿六', '廿七', '廿八', '廿九', '三十');
 
 // 国历节日 *表示放假日
 var sFtv = new Array(
@@ -42,20 +49,16 @@ var sFtv = new Array(
   '0501 劳动节',
   '0504 青年节',
   '0512 护士节',
-  '0520 文珊生日',
   '0601 儿童节',
-  '0613 坤生日',
   '0614 Flag Day',
   '0701 建党节 香港回归纪念',
   '0801 建军节',
   '0808 父亲节',
-  '0908 茂生日',
   '0909 毛泽东逝世纪念',
   '0910 教师节',
   '0928 孔子诞辰',
   '1001*国庆节',
   '1006 老人节',
-  '1011 少珊生日',
   '1024 联合国日',
   '1111 Veteran\'s / Remembrance Day',
   '1112 孙中山诞辰纪念',
@@ -370,7 +373,7 @@ function _calendar(y, m) {
 }
 
 function getCalendarInfo(year, month) {
-console.log(month)
+
   var currentMonth = new _calendar(year, month);
   var firstWeek = currentMonth.firstWeek;
   var prevMonth = null;
@@ -392,8 +395,15 @@ console.log(month)
   prevMonth = calendarOutputToArray(prevMonth);
   nextMonth = calendarOutputToArray(nextMonth);
 
-  var weekPrevMonth = prevMonth.slice(prevMonth.length - firstWeek + 1, prevMonth.length);
-  var weekNextMonth = nextMonth.slice(0, 7 - currentMonth[currentMonth.length - 1].weekIndex);
+  var nextMonthCount = 0;
+
+  if (currentMonth[currentMonth.length - 1].weekIndex === 7) {
+    nextMonthCount = 6;
+  } else {
+    nextMonthCount = 6 - currentMonth[currentMonth.length - 1].weekIndex;
+  }
+  var weekPrevMonth = prevMonth.slice(prevMonth.length - firstWeek, prevMonth.length);
+  var weekNextMonth = nextMonth.slice(0, nextMonthCount);
 
   weekNextMonth.forEach(function(item) {
     item.nextMonth = true;
@@ -408,6 +418,7 @@ console.log(month)
 function calendarOutputToArray(cld) {
   var out = [];
   for (var i = 0; i < cld.length; i++) {
+    cld[i].lDayName = CnDayStr[cld[i].lDay];
     out.push(cld[i]);
   }
   return out;

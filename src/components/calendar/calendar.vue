@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="week-wrap">
-      <div v-for="week in weeks" class="week-title">
-        {{week}}
+      <div v-for="week in weeks" class="week-title" :class="{'wenkend-title':(week == '日' || week === '六')}">
+        星期{{week}}
       </div>
     </div>
     <div v-for="item in cldInfo" class="day-item">
-      <span v-bind:class="{ 'prev-next-day': item.prevMonth || item.nextMonth }">{{item.sDay}}</span>
+      <span v-bind:class="{ 'prev-next-day': item.prevMonth || item.nextMonth }" class="s-day">{{item.solarFestival || item.sDay}}</span>
+      <span v-bind:class="{ 'prev-next-day': item.prevMonth || item.nextMonth }" class="l-day">{{item.lunarFestival || item.lDayName}}</span>
     </div>
   </div>
 </template>
@@ -30,7 +31,7 @@ export default {
   },
   data: function() {
     return {
-      weeks: ['一', '二', '三', '四', '五', '六', '日']
+      weeks: ['日', '一', '二', '三', '四', '五', '六']
     }
   },
   computed: {
@@ -51,15 +52,41 @@ export default {
 .week-title {
   display: inline-block;
   width: calc( (100% / 7));
+  text-align: center;
+  height: 32px;
+  line-height: 32px;
+  background-color: rgba(91, 161, 216, 0.7);
+}
+
+.wenkend-title {
+  background-color: rgba(252, 234, 210, 1);
 }
 
 .day-item {
   display: inline-block;
   width: calc( (100% / 7));
   height: 80px;
+  border:1px solid #eee;
+  position: relative;
 }
 
 .prev-next-day {
   color: #ccc;
+}
+
+.s-day{
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 4px;
+  margin-left: 8px;
+}
+
+.l-day{
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  right: 8px;
+  position: absolute;
 }
 </style>

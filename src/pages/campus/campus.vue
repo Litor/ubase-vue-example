@@ -9,7 +9,6 @@
   </article>
 </template>
 <script>
-import {setTitle} from './campusaddoredit/campusaddoredit.vuex'
 import service from './campus.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -41,10 +40,10 @@ export default {
       var checked = this.$refs.table.checkedRecords()
       this.pageopt.willDeleteWids = checked
       if (checked.length === 0) {
-        Vue.tipPop(this, 'noselect')
+        Vue.tip(this, 'noselect')
         return
       }
-      Vue.tipDialog(this, 'del')
+      Vue.toast(this, 'del')
     },
 
     'campus:search:top': function() {
@@ -59,8 +58,8 @@ export default {
     },
 
     'campus:table:del': function(row) {
-      this.pageopt.willDeleteWids = [row.wid]
-      Vue.tipDialog(this, 'del')
+      this.pageopt.willDeleteWids = [{ wid: row.wid }]
+      Vue.toast(this, 'del')
     },
 
     'campus:tipdialog:del': function() {
@@ -72,7 +71,7 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.table.reload()
       })
     }

@@ -1,6 +1,6 @@
 var cn = {
   title: '标题',
-  tipPop: {
+  tip: {
     save_success: '保存成功！'
   }
 };

@@ -10,10 +10,10 @@ var cn = {
   dialog: {
     title: '对话框标题'
   },
-  tipDialog: {
+  toast: {
     del: '您选择需要删除的信息吗？'
   },
-  tipPop: {
+  tip: {
     noselect: '请选择需要删除的信息？',
     del_success: '删除成功！'
   }

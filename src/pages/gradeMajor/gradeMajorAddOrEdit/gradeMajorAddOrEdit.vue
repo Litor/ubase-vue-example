@@ -40,10 +40,10 @@ export default {
       console.log(this.$refs.grid)
       var checked = this.$refs.grid.getGrid().checkedRecords()
       if (checked.length === 0) {
-        Vue.tipPop(this, 'noselect')
+        Vue.tip(this, 'noselect')
         return
       }
-      Vue.tipDialog(this, 'del')
+      Vue.toast(this, 'del')
     },
 
     'gradeMajorAddOrEdit:grid:detail': function(row) {
@@ -67,7 +67,7 @@ export default {
 
     'gradeMajorAddOrEdit:grid:del': function(row) {
       service.delete([row.wid]).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.grid.reload()
       })
     },
@@ -81,7 +81,7 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.grid.reload()
       })
     }

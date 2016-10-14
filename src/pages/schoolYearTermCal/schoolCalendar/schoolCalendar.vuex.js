@@ -1,17 +1,15 @@
 import service from './schoolCalendar.service';
-const SET_TITLE = 'SET_TITLE';
 
 // init state
 export const state = {
   title: Vue.t('schoolCalendar.title'),
   paperDialog: {
-    currentView: 'schoolCalendar',
-    title: Vue.t('schoolCalendar.paperDialog.add_title')
+    currentView: 'schoolCalendar'
   },
   propertyDialog: {
     currentView: 'schoolCalendarAddOrEdit',
     okEvent: '_SUBPAGE_SAVE_EVENT_',
-    title: Vue.t('schoolCalendar.propertyDialog.title'),
+    title: Vue.t('schoolCalendar.propertyDialog.title')
   },
   dialog: {
     currentView: 'schoolCalendar',
@@ -22,33 +20,27 @@ export const state = {
     text: Vue.t('schoolCalendar.buttonList.add'),
     clickEvent: 'schoolCalendar:buttonlist:add',
     primary: true
-  }, {
-    text: Vue.t('schoolCalendar.buttonList.del'),
-    clickEvent: 'schoolCalendar:buttonlist:del'
-  }, {
-    text: Vue.t('schoolCalendar.buttonList.import'),
-    clickEvent: 'schoolCalendar:buttonlist:import'
   }],
   simpleSearch: {
     placeholder: Vue.t('schoolCalendar.simpleSearch.placeholder'),
     text: Vue.t('schoolCalendar.simpleSearch.text'),
     searchEvent: 'schoolCalendar:search:top'
   },
-  tipDialog: {
+  toast: {
     del: {
       type: 'warning',
-      title: Vue.t('schoolCalendar.tipDialog.del'),
+      title: Vue.t('schoolCalendar.toast.del'),
       okEvent: 'schoolCalendar:tipdialog:del'
     }
   },
-  tipPop: {
+  tip: {
     noselect: {
       state: 'warning',
-      content: Vue.t('schoolCalendar.tipPop.noselect')
+      content: Vue.t('schoolCalendar.tip.noselect')
     },
     del_success: {
       state: 'success',
-      content: Vue.t('schoolCalendar.tipPop.del_success')
+      content: Vue.t('schoolCalendar.tip.del_success')
     }
   },
   emapCard: {
@@ -59,14 +51,7 @@ export const state = {
   }
 };
 
-// mutations
-export const mutations = {
-  [SET_TITLE](state, data) {
-    state.title = data.title;
-  }
-};
-
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {
-  return dispatch(SET_TITLE, { title: title });
+  state.title = title;
 };

@@ -40,10 +40,10 @@ export default {
       var checked = this.$refs.table.checkedRecords()
       this.pageopt.selectedRows = checked
       if (checked.length === 0) {
-        Vue.tipPop(this, 'noselect')
+        Vue.tip(this, 'noselect')
         return
       }
-      Vue.tipDialog(this, 'del')
+      Vue.toast(this, 'del')
     },
 
     'teachGroup:buttonlist:import': function() {
@@ -63,7 +63,7 @@ export default {
 
     'teachGroup:table:del': function(row) {
       this.pageopt.selectedRows = [row]
-      Vue.tipDialog(this, 'del')
+      Vue.toast(this, 'del')
     },
 
     'teachGroup:tipdialog:del': function() {
@@ -75,7 +75,7 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tipPop(this, 'del_success')
+        Vue.tip(this, 'del_success')
         this.$refs.table.reload()
       })
     }

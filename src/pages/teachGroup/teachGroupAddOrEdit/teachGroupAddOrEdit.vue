@@ -31,7 +31,7 @@ export default {
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
-        Vue.tipPop(this, 'save_success')
+        Vue.tip(this, 'save_success')
         Vue.propertyDialog('hide')
       })
     }

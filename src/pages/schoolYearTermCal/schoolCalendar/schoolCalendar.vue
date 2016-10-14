@@ -25,9 +25,9 @@ export default {
   ready() {
     var self = this;
     $(this.$el).on('click', '.opt-button', function(e) {
-      var rowId = $(this).attr('data-id');
+      var row = $(this).data('row');
       var event = $(this).attr('data-event');
-      self.$dispatch(event, rowId);
+      self.$dispatch(event, row);
     })
   },
 
@@ -42,13 +42,14 @@ export default {
       Vue.propertyDialog(this)
     },
 
-    'schoolCalendar:card:edit': function(id) {
-      alert(id)
+    'schoolCalendar:card:edit': function(row) {
+      console.log(row)
     },
 
-    'schoolCalendar:card:detail': function() {
+    'schoolCalendar:card:detail': function(wid) {
       this.pageopt.paperDialog.currentView = 'calendarDetail'
       Vue.paperDialog(this)
+      this.$broadcast('calendardetail:init', wid)
     }
   }
 }
@@ -62,14 +63,17 @@ export default {
   vertical-align: bottom;
 }
 
-.schoolCalendar-card .sc-panel-thing-1-container {
+.schoolCalendar-card .sc-panel-thingNoImg-1-container {
   padding-right: 4px;
 }
 
-.schoolCalendar-card .sc-panel-thing-1-title {
-  width: 158px;
+.schoolCalendar-card .sc-panel-thingNoImg-1-title {
+  max-width: 155px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  display: inline-block;
+  margin-right: 0;
+  vertical-align: middle;
 }
 </style>
