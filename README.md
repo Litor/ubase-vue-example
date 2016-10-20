@@ -89,7 +89,7 @@ Vue.propertyDialog('hide')
 
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
-| currentView | 组件名称 | String | '' | 弹框中需要显示的vue组件名称（框架通过动态组件加载）|
+| currentView | 组件名称 | String | -- | 弹框中需要显示的vue组件名称（框架通过动态组件加载）|
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
 | footerShow | 是否显示底部按钮 | true | -- | 底部按钮区域是否显示 |
 | okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件 |
@@ -113,7 +113,7 @@ Vue.dialog('hide')
 
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
-| currentView | 组件名称 | String | '' | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| currentView | 组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
 | width | 宽度 | String | '500px' | 对话框宽度 |
 | height | 高度 | String | '600px' | 对话框高度 |
@@ -135,7 +135,7 @@ Vue.tip({
 | ---    | ---   | ---   | ---     | ---   |
 | content | 提示内容 | String | '' | |
 | state | 提示类型 | String | -- | 可选值：primary, success, warning, danger, loading  |
-| hideWaitTime | 自定义停留时间 | Integer | 5000 | -- |
+| hideWaitTime | 自定义停留时间 | Integer | 5000 |  |
 | iconClass | 自定义图标提示 | String | -- | 可选 |
 | onClosed | 提示关闭的回调 | Function | -- |  |
 
@@ -156,13 +156,18 @@ Vue.toast({
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
 | title | 提示标题 | String | -- |   |
-| content | 弹框内容 | String | '' | |
+| content | 弹框内容 | String | -- | |
 | type | 弹框类型 | String | -- | 可选值：success, warning, danger |
-| okEvent | 确定按钮事件 | Function | -- | -- |
-| okText | 确定按钮文字 | String | 确定 | -- |
+| okEvent | 确定按钮事件 | Function | -- |  |
+| okText | 确定按钮文字 | String | 确定 | |
 | cancelEvent | 取消按钮事件 | Function | -- |  |
-| cancelText | 取消按钮文字 | String | 取消 | -- |
+| cancelText | 取消按钮文字 | String | 取消 |  |
 
+
+## 事件触发方式
+```
+Vue.broadcast('campusaddoredit:setvalue', row)
+```
 ## Setup
 
 ### clone
