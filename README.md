@@ -47,15 +47,26 @@ src/
 ## 支持弹框类型(5种)
 
 ### 纸质弹框
-#### Properties（vuex中配置属性）
+
+#### 调用方式
+* 打开
+```
+Vue.paperDialog({
+    title: "编辑"
+    currentView: 'addOrEdit'
+});
+```
+* 手动隐藏
+```
+Vue.paperDialog('hide')
+```
+
+#### Properties
 
 | 名称  | 描述 | 类型 | 默认值 | 备注 |
 | ---    | ---   | ---   | ---     | ---   |
 | currentView | 组件名称 | String | '' | 纸质弹框中需要显示的vue组件名称（框架通过动态组件加载）|
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
-
-#### 纸质弹框手动隐藏
-Vue.paperDialog('hide')
 
 ### 属性弹框
 ### 对话框
