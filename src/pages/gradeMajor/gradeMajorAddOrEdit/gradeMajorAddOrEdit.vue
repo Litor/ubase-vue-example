@@ -1,9 +1,14 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2>{{$t('gradeMajorAddOrEdit.title')}}</h2>
     <section>
-      <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-      <button-list :button-list="pageopt.buttonList"></button-list>
+      <simple-search v-ref:simplesearch :placeholder="$t('gradeMajorAddOrEdit.simpleSearch.placeholder')" :search-event="'gradeMajorAddOrEdit:search:top'"></simple-search>
+      <div class="bh-mv-16">
+        <bh-button type="primary" @click="add" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.add')}}</bh-button>
+        <bh-button type="primary" @click="del" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.del')}}</bh-button>
+        <bh-button type="primary" @click="importt" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.import')}}</bh-button>
+        <bh-button type="primary" @click="exportt" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.export')}}</bh-button>
+      </div>
       <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
     </section>
   </article>
@@ -12,10 +17,10 @@
 import service from './gradeMajorAddOrEdit.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapGrid, simpleSearch, buttonList },
+  components: { EmapGrid, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -25,55 +30,79 @@ export default {
     }
   },
 
+  methods: {
+    add() {
+      Vue.paperDialog({
+        currentView: 'gradeMajorAddOrEdit',
+        title: Vue.t('gradeMajorAddOrEdit.paperDialog.add_title')
+      })
+    },
+
+    del() {
+      var checked = this.$refs.grid.getGrid().checkedRecords()
+      this.pageopt.selectedRows = checked
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('gradeMajorAddOrEdit.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('gradeMajorAddOrEdit.toast.del'),
+        okEvent: 'gradeMajorAddOrEdit:tipdialog:del'
+      })
+    },
+
+    importt() {
+      Vue.dialog({
+        currentView: 'gradeMajorAddOrEdit',
+        okEvent: '_SUBPAGE_SAVE_EVENT_',
+        title: Vue.t('gradeMajorAddOrEdit.dialog.title')
+      })
+    },
+
+    exportt() {
+      console.log('export')
+    }
+  },
+
   events: {
     'gradeMajorAddOrEdit:search:top': function() {
       var keyword = this.$refs.simplesearch.keyword
       this.$refs.grid.reload({ searchContent: keyword })
     },
 
-    'gradeMajorAddOrEdit:buttonlist:add': function() {
-      this.pageopt.paperDialog.title = Vue.t('gradeMajorAddOrEdit.paperDialog.add_title')
-      Vue.paperDialog(this)
-    },
-
-    'gradeMajorAddOrEdit:buttonlist:del': function() {
-      console.log(this.$refs.grid)
-      var checked = this.$refs.grid.getGrid().checkedRecords()
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
     'gradeMajorAddOrEdit:grid:detail': function(row) {
       this.pageopt.propertyDialog.title = row['name']
-      Vue.propertyDialog(this)
-    },
-
-    'gradeMajorAddOrEdit:buttonlist:import': function() {
-      Vue.dialog(this)
-    },
-
-    'gradeMajorAddOrEdit:buttonlist:export': function() {
-      console.log('export')
+      Vue.propertyDialog({
+        currentView: 'gradeMajorAddOrEdit',
+        okEvent: '_SUBPAGE_SAVE_EVENT_',
+        title: Vue.t('gradeMajorAddOrEdit.propertyDialog.title'),
+        footerShow: false
+      })
     },
 
     'gradeMajorAddOrEdit:grid:edit': function(row) {
-      this.pageopt.paperDialog.title = Vue.t('gradeMajorAddOrEdit.paperDialog.edit_title')
-      Vue.paperDialog(this)
-      this.$broadcast('addedit:setvalue', row)
+      Vue.paperDialog({
+        currentView: 'gradeMajorAddOrEdit',
+        title: Vue.t('gradeMajorAddOrEdit.paperDialog.edit_title')
+      })
+      Vue.broadcast('addedit:setvalue', row)
     },
 
     'gradeMajorAddOrEdit:grid:del': function(row) {
-      service.delete([row.wid]).then(({ data }) => {
-        Vue.tip(this, 'del_success')
-        this.$refs.grid.reload()
+      this.pageopt.willDeleteWids = [row]
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('gradeMajorAddOrEdit.toast.del'),
+        okEvent: 'gradeMajorAddOrEdit:tipdialog:del'
       })
     },
 
     'gradeMajorAddOrEdit:tipdialog:del': function() {
-      var checked = this.$refs.grid.getGrid().checkedRecords()
+      var checked = this.pageopt.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {
@@ -81,7 +110,10 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('gradeMajorAddOrEdit.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     }

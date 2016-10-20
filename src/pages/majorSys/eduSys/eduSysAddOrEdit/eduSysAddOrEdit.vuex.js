@@ -2,7 +2,6 @@ import service from './eduSysAddOrEdit.service';
 
 // init state
 export const state = {
-  title: Vue.t('eduSysAddOrEdit.title'),
   options: {
     pagePath: service.api.addOrEdit_meta,
     modelName: service.api.addOrEdit_action,
@@ -10,15 +9,8 @@ export const state = {
     readonly: false,
     model: 'v'
   },
-  tip: {
-    save_success: {
-      state: 'success',
-      content: Vue.t('eduSysAddOrEdit.tip.save_success')
-    }
-  },
   outline: false
 };
-
 
 // actions
 export const setTitle = ({ actions, dispatch }, title) => {

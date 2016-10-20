@@ -23,16 +23,19 @@ export default {
       this.$refs.form.setValue(val)
     },
     'majorDirectionAddOrEdit:save': function(test) {
-      
+
       var ret = this.$refs.form.validate()
-      
+
       if (!ret) {
         return
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
         Vue.dialog('hide')
-        Vue.tip(this, 'save_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('majorDirectionAddOrEdit.tip.save_success')
+        })
       })
     }
   }

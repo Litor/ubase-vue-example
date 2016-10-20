@@ -1,9 +1,13 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2>{{$t('classs.title')}}</h2>
     <section>
-      <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-      <button-list :button-list="pageopt.buttonList"></button-list>
+      <simple-search v-ref:simplesearch :placeholder="$t('classs.simpleSearch.placeholder')" :search-event="'classs:search:top'"></simple-search>
+      <div class="bh-mv-16">
+        <bh-button type="primary" @click="add" :small="false">{{$t('classs.buttonList.add')}}</bh-button>
+        <bh-button type="primary" @click="del" :small="false">{{$t('classs.buttonList.del')}}</bh-button>
+        <bh-button type="primary" @click="importt" :small="false">{{$t('classs.buttonList.import')}}</bh-button>
+      </div>
       <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
     </section>
   </article>
@@ -12,10 +16,10 @@
 import service from './classs.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapGrid, simpleSearch, buttonList },
+  components: { EmapGrid, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -27,11 +31,43 @@ export default {
 
   ready() {
     var self = this;
-    $(this.$el).on('click', '.opt-button', function(e) {
+    $(this.$el).on('click', '.card-opt-button', function(e) {
       var row = $(this).data('row');
       var event = $(this).attr('data-event');
       self.$emit(event, row);
     })
+  },
+
+  methods: {
+    add() {
+      this.pageopt.paperDialog.title = Vue.t('classs.paperDialog.add_title')
+      Vue.paperDialog(this)
+    },
+
+    del() {
+      var checked = this.$refs.grid.getGrid().checkedRecords()
+      this.pageopt.selectedRows = checked
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('classs.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('classs.toast.del'),
+        okEvent: 'classs:tipdialog:del'
+      })
+    },
+
+    importt() {
+      Vue.dialog({
+        currentView: 'classs',
+        okEvent: '_SUBPAGE_SAVE_EVENT_',
+        title: Vue.t('classs.dialog.title')
+      })
+    }
   },
 
   events: {
@@ -40,40 +76,29 @@ export default {
       this.$refs.grid.reload({ searchContent: keyword })
     },
 
-    'classs:buttonlist:add': function() {
-      this.pageopt.paperDialog.title = Vue.t('classs.paperDialog.add_title')
-      Vue.paperDialog(this)
-    },
-
-    'classs:buttonlist:del': function() {
-      var checked = this.$refs.grid.getGrid().checkedRecords()
-      this.pageopt.selectedRows = checked
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
     'classs:grid:detail': function(row) {
-      this.pageopt.propertyDialog.title = row['name']
-      Vue.propertyDialog(this)
-      this.$broadcast('classDetail:setvalue', row)
-    },
-
-    'classs:buttonlist:import': function() {
-      Vue.dialog(this)
+      Vue.propertyDialog({
+        title: row['name'],
+        currentView: 'classDetail',
+      })
+      Vue.broadcast('classDetail:setvalue', row)
     },
 
     'classs:grid:edit': function(row) {
-      this.pageopt.paperDialog.title = Vue.t('classs.paperDialog.edit_title')
-      Vue.paperDialog(this)
-      this.$broadcast('classAddOrEdit:setvalue', row)
+      Vue.paperDialog({
+        title: Vue.t('classs.paperDialog.edit_title'),
+        currentView: 'classAddOrEdit',
+      })
+      Vue.broadcast('classAddOrEdit:setvalue', row)
     },
 
     'classs:grid:del': function(row) {
       this.pageopt.selectedRows = [row]
-      Vue.toast(this, 'del')
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('classs.toast.del'),
+        okEvent: 'classs:tipdialog:del'
+      })
     },
 
     'classs:tipdialog:del': function() {
@@ -85,28 +110,41 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('classs.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },
 
     'classs:card:edit': function(row) {
       service.getByWid(row.wid).then((row) => {
-        Vue.paperDialog(this)
-        this.$broadcast('classAddOrEdit:setvalue', row)
+        Vue.paperDialog({
+          title: Vue.t('classs.paperDialog.edit_title'),
+          currentView: 'classAddOrEdit',
+        })
+        Vue.broadcast('classAddOrEdit:setvalue', row)
       })
     },
 
     'classs:card:detail': function(row) {
       service.getByWid(row.wid).then((row) => {
-        Vue.propertyDialog(this)
-        this.$broadcast('classDetail:setvalue', row)
+        Vue.propertyDialog({
+          title: row['name'],
+          currentView: 'classDetail',
+        })
+        Vue.broadcast('classDetail:setvalue', row)
       })
     },
 
     'classs:card:del': function(row) {
       this.pageopt.selectedRows = [row]
-      Vue.toast(this, 'del')
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('classs.toast.del'),
+        okEvent: 'classs:tipdialog:del'
+      })
     }
   }
 }

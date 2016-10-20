@@ -24,13 +24,16 @@ export default {
     },
     'classDetail:save': function() {
       var ret = this.$refs.form.validate()
-      console.log(ret)
+      
       if (!ret) {
         return
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
-        Vue.tip(this, 'save_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('classDetail.tip.save_success')
+        })
         Vue.propertyDialog('hide')
       })
     }

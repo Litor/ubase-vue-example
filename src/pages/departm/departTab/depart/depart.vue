@@ -1,7 +1,11 @@
 <template>
   <section>
-    <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-    <button-list :button-list="pageopt.buttonList"></button-list>
+    <simple-search v-ref:simplesearch :placeholder="$t('depart.simpleSearch.placeholder')" :search-event="'depart:search:top'"></simple-search>
+    <div class="bh-mv-16">
+      <bh-button type="primary" @click="add" :small="false">{{$t('depart.buttonList.add')}}</bh-button>
+      <bh-button type="primary" @click="del" :small="false">{{$t('depart.buttonList.del')}}</bh-button>
+      <bh-button type="primary" @click="importt" :small="false">{{$t('depart.buttonList.import')}}</bh-button>
+    </div>
     <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
   </section>
 </template>
@@ -10,10 +14,10 @@ import { setDepartFormReadOnly } from './departAddOrEdit/departAddOrEdit.vuex'
 import service from './depart.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapGrid, simpleSearch, buttonList },
+  components: { EmapGrid, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -27,11 +31,46 @@ export default {
 
   ready() {
     var self = this;
-    $(this.$el).on('click', '.opt-button', function(e) {
+    $(this.$el).on('click', '.card-opt-button', function(e) {
       var row = $(this).data('row');
       var event = $(this).attr('data-event');
       self.$dispatch(event, row);
     })
+  },
+
+  methods: {
+    add() {
+      this.setDepartFormReadOnly(false)
+      this.pageopt.paperDialog.title = Vue.t('depart.paperDialog.add_title')
+      Vue.paperDialog({
+        currentView: 'departAddOrEdit',
+        title: Vue.t('depart.paperDialog.add_title')
+      })
+    },
+
+    del() {
+      var checked = this.$refs.grid.getGrid().checkedRecords()
+      this.pageopt.selectedRows = checked
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('depart.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('depart.toast.del'),
+        okEvent: 'depart:tipdialog:del'
+      })
+    },
+
+    importt() {
+      Vue.dialog({
+        currentView: 'depart',
+        title: Vue.t('depart.dialog.title')
+      })
+    }
   },
 
   events: {
@@ -40,48 +79,36 @@ export default {
       this.$refs.grid.reload({ searchContent: keyword })
     },
 
-    'depart:buttonlist:add': function() {
-      this.setDepartFormReadOnly(false)
-      this.pageopt.paperDialog.title = Vue.t('depart.paperDialog.add_title')
-      Vue.paperDialog(this)
-    },
-
-    'depart:buttonlist:del': function() {
-      var checked = this.$refs.grid.getGrid().checkedRecords()
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
-    'depart:buttonlist:import': function() {
-      Vue.dialog(this)
-    },
-
     'depart:grid:edit': function(row) {
       this.setDepartFormReadOnly(false)
-      this.pageopt.paperDialog.title = Vue.t('depart.paperDialog.edit_title')
-      Vue.paperDialog(this)
-      this.$broadcast('departAddOrEdit:setvalue', row)
+      Vue.paperDialog({
+        title: Vue.t('depart.paperDialog.edit_title'),
+        currentView: 'departAddOrEdit',
+      })
+      Vue.broadcast('departAddOrEdit:setvalue', row)
     },
 
     'depart:grid:del': function(row) {
       service.delete([row.wid]).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('depart.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },
 
     'depart:grid:detail': function(row) {
       this.setDepartFormReadOnly(true)
-      this.pageopt.paperDialog.title = Vue.t('depart.paperDialog.detail_title')
-      Vue.paperDialog(this)
-      this.$broadcast('departAddOrEdit:setvalue', row)
+      Vue.paperDialog({
+        title: Vue.t('depart.paperDialog.detail_title'),
+        currentView: 'departAddOrEdit',
+      })
+      Vue.broadcast('departAddOrEdit:setvalue', row)
     },
 
     'depart:tipdialog:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
+      var checked = this.$refs.grid.getGrid().checkedRecords()
       var wids = []
 
       checked.forEach((item) => {
@@ -89,7 +116,10 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('depart.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },

@@ -2,50 +2,6 @@ import service from './campus.service';
 
 // init state
 export const state = {
-  title: Vue.t('campus.title'),
-  paperDialog: {
-    currentView: 'campus',
-    title: Vue.t('campus.paperDialog.add_title')
-  },
-  propertyDialog: {
-    currentView: 'campusaddoredit',
-    okEvent: 'campusaddoredit:save',
-    title: Vue.t('campus.propertyDialog.add_title')
-  },
-  dialog: {
-    currentView: 'campus',
-    title: Vue.t('campus.dialog.title')
-  },
-  buttonList: [{
-    text: Vue.t('campus.buttonList.add'),
-    clickEvent: 'campus:buttonlist:add',
-    primary: true
-  }, {
-    text: Vue.t('campus.buttonList.del'),
-    clickEvent: 'campus:buttonlist:del'
-  }],
-  simpleSearch: {
-    placeholder: Vue.t('campus.simpleSearch.placeholder'),
-    text: Vue.t('campus.simpleSearch.text'),
-    searchEvent: 'campus:search:top'
-  },
-  toast: {
-    del: {
-      type: 'warning',
-      title: Vue.t('campus.toast.del'),
-      okEvent: 'campus:tipdialog:del'
-    }
-  },
-  tip: {
-    noselect: {
-      state: 'warning',
-      content: Vue.t('campus.tip.noselect')
-    },
-    del_success: {
-      state: 'success',
-      content: Vue.t('campus.tip.del_success')
-    }
-  },
   willDeleteWids: [],
   emapDatatable: {
     pagePath: service.api.getList_meta,

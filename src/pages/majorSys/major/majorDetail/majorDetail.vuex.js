@@ -10,12 +10,6 @@ export const state = {
     readonly: true,
     model: 'v'
   },
-  tip: {
-    save_success: {
-      state: 'success',
-      content: Vue.t('majorDetail.tip.save_success')
-    }
-  },
   outline: false
 };
 

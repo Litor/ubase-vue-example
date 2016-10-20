@@ -1,6 +1,6 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2>{{$t('departTab.title')}}</h2>
     <section>
       <comp-tab :tabs="pageopt.tabs"></comp-tab>
     </section>

@@ -20,15 +20,19 @@ export default {
     'campusaddoredit:setvalue': function(val) {
       this.$refs.form.setValue(val)
     },
+    
     'campusaddoredit:save': function() {
       var ret = this.$refs.form.validate()
-      console.log(ret)
+      
       if (!ret) {
         return
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
-        Vue.tip(this, 'save_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('campusaddoredit.tip.save_success')
+        })
         Vue.propertyDialog('hide')
       })
     }

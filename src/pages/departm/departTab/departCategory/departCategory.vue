@@ -1,7 +1,10 @@
 <template>
   <section>
-    <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-    <button-list :button-list="pageopt.buttonList"></button-list>
+    <simple-search v-ref:simplesearch :placeholder="$t('departCategory.simpleSearch.placeholder')" :search-event="'departCategory:search:top'"></simple-search>
+    <div class="bh-mv-16">
+      <bh-button type="primary" @click="add" :small="false">{{$t('departCategory.buttonList.add')}}</bh-button>
+      <bh-button type="primary" @click="del" :small="false">{{$t('departCategory.buttonList.del')}}</bh-button>
+    </div>
     <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
   </section>
 </template>
@@ -9,10 +12,10 @@
 import service from './departCategory.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapDatatable, simpleSearch, buttonList },
+  components: { EmapDatatable, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -22,36 +25,54 @@ export default {
     }
   },
 
+  methods: {
+    add() {
+      this.pageopt.propertyDialog.title = Vue.t('departCategory.propertyDialog.add_title')
+      Vue.propertyDialog({
+        currentView: 'departCategoryAddOrEdit',
+        okEvent: 'departCategoryAddOrEdit:save',
+        title: Vue.t('departCategory.propertyDialog.title')
+      })
+    },
+
+    del() {
+      var checked = this.$refs.table.checkedRecords()
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('departCategory.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('departCategory.toast.del'),
+        okEvent: 'departCategory:tipdialog:del'
+      })
+    }
+  },
+
   events: {
     'departCategory:search:top': function() {
       var keyword = this.$refs.simplesearch.keyword
       this.$refs.table.reload({ searchContent: keyword })
     },
 
-    'departCategory:buttonlist:add': function() {
-      this.pageopt.propertyDialog.title = Vue.t('departCategory.propertyDialog.add_title')
-      Vue.propertyDialog(this)
-    },
-
-    'departCategory:buttonlist:del': function() {
-      var checked = this.$refs.table.checkedRecords()
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
     'departCategory:table:edit': function(row) {
-      this.pageopt.propertyDialog.title = Vue.t('departCategory.propertyDialog.edit_title')
-      Vue.propertyDialog(this)
-      this.$broadcast('departCategoryAddOrEdit:setvalue', row)
+      Vue.propertyDialog({
+        currentView: 'departCategoryAddOrEdit',
+        okEvent: 'departCategoryAddOrEdit:save',
+        title: Vue.t('departCategory.propertyDialog.edit_title')
+      })
+      Vue.broadcast('departCategoryAddOrEdit:setvalue', row)
     },
 
     'departCategory:table:del': function(row) {
-      service.delete([row.wid]).then(({ data }) => {
-        Vue.tip(this, 'del_success')
-        this.$refs.table.reload()
+      this.pageopt.selectedRows = [row]
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('departCategory.toast.del'),
+        okEvent: 'departCategory:tipdialog:del'
       })
     },
 
@@ -64,7 +85,10 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('departCategory.tip.del_success')
+        })
         this.$refs.table.reload()
       })
     }

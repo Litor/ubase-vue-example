@@ -1,8 +1,10 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2>{{$t('majorDirection.title')}}</h2>
     <section>
-      <button-list :button-list="pageopt.buttonList"></button-list>
+      <div class="bh-mv-16">
+        <bh-button type="primary" @click="add" :small="false">{{$t('majorDirection.buttonList.add')}}</bh-button>
+      </div>
       <emap-card :options='pageopt.emapCard' v-ref:table></emap-card>
     </section>
   </article>
@@ -10,10 +12,10 @@
 <script>
 import service from './majorDirection.service'
 import EmapCard from 'bh-vue/emap-card/emapCard.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapCard, buttonList },
+  components: { EmapCard, bhButton },
 
   vuex: {
     getters: {
@@ -25,12 +27,24 @@ export default {
 
   ready() {
     var self = this;
-    
-    $(this.$el).on('click', '.opt-button', function(e) {
+
+    $(this.$el).on('click', '.card-opt-button', function(e) {
       var row = $(this).data('row');
       var event = $(this).attr('data-event');
       self.$dispatch(event, row);
     })
+  },
+
+  methods: {
+    add() {
+      Vue.dialog({
+        currentView: 'majorDirectionAddOrEdit',
+        title: Vue.t('majorDirection.dialog.title'),
+        okEvent: 'majorDirectionAddOrEdit:save',
+        width: '400px',
+        height: '350px'
+      })
+    }
   },
 
   events: {
@@ -38,16 +52,12 @@ export default {
       var keyword = this.$refs.simplesearch.keyword
       this.$refs.table.reload({ searchContent: keyword })
     },
-    
-    'majorDirection:buttonlist:add': function() {
-      Vue.dialog(this)
-    },
 
-    'majorDirection:card:edit':function(row){
+    'majorDirection:card:edit': function(row) {
       console.log(row)
     },
 
-    'majorDirection:card:del':function(){
+    'majorDirection:card:del': function(row) {
 
     }
   }

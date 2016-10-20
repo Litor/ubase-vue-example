@@ -2,7 +2,6 @@ import service from './departTab.service';
 
 // initial state
 export const state = {
-  title: Vue.t('departTab.title'),
   tabs: [
     { title: Vue.t('departTab.departCategory'), component: 'departCategory' },
     { title: Vue.t('departTab.deptRunType'), component: 'deptRunType' },

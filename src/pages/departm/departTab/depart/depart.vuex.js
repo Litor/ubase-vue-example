@@ -2,53 +2,6 @@ import service from './depart.service';
 
 // init state
 export const state = {
-  title: Vue.t('depart.title'),
-  paperDialog: {
-    currentView: 'departAddOrEdit',
-    title: Vue.t('depart.paperDialog.add_title')
-  },
-  propertyDialog: {
-    currentView: 'departDetail',
-    okEvent: '_SUBPAGE_SAVE_EVENT_',
-    title: Vue.t('depart.propertyDialog.title')
-  },
-  dialog: {
-    currentView: 'depart',
-    title: Vue.t('depart.dialog.title')
-  },
-  buttonList: [{
-    text: Vue.t('depart.buttonList.add'),
-    clickEvent: 'depart:buttonlist:add',
-    primary: true
-  }, {
-    text: Vue.t('depart.buttonList.del'),
-    clickEvent: 'depart:buttonlist:del'
-  }, {
-    text: Vue.t('depart.buttonList.import'),
-    clickEvent: 'depart:buttonlist:import'
-  }],
-  simpleSearch: {
-    placeholder: Vue.t('depart.simpleSearch.placeholder'),
-    text: Vue.t('depart.simpleSearch.text'),
-    searchEvent: 'depart:search:top'
-  },
-  toast: {
-    del: {
-      type: 'warning',
-      title: Vue.t('depart.toast.del'),
-      okEvent: 'depart:tipdialog:del'
-    }
-  },
-  tip: {
-    noselect: {
-      state: 'warning',
-      content: Vue.t('depart.tip.noselect')
-    },
-    del_success: {
-      state: 'success',
-      content: Vue.t('depart.tip.del_success')
-    }
-  },
   emapGrid: {
     pagePath: service.api.getList_meta,
     url: service.api.getList,

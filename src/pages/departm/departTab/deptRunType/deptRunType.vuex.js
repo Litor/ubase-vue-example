@@ -2,50 +2,7 @@ import service from './deptRunType.service';
 
 // init state
 export const state = {
-  title: Vue.t('deptRunType.title'),
-  paperDialog: {
-    currentView: 'deptRunType',
-    title: Vue.t('deptRunType.paperDialog.add_title')
-  },
-  propertyDialog: {
-    currentView: 'deptRunTypeAddOrEdit',
-    okEvent: 'deptRunTypeAddOrEdit:save',
-    title: Vue.t('deptRunType.propertyDialog.title')
-  },
-  dialog: {
-    currentView: 'deptRunType',
-    title: Vue.t('deptRunType.dialog.title')
-  },
-  buttonList: [{
-    text: Vue.t('deptRunType.buttonList.add'),
-    clickEvent: 'deptRunType:buttonlist:add',
-    primary: true
-  }, {
-    text: Vue.t('deptRunType.buttonList.del'),
-    clickEvent: 'deptRunType:buttonlist:del'
-  }],
-  simpleSearch: {
-    placeholder: Vue.t('deptRunType.simpleSearch.placeholder'),
-    text: Vue.t('deptRunType.simpleSearch.text'),
-    searchEvent: 'deptRunType:search:top'
-  },
-  toast: {
-    del: {
-      type: 'warning',
-      title: Vue.t('deptRunType.toast.del'),
-      okEvent: 'deptRunType:tipdialog:del'
-    }
-  },
-  tip: {
-    noselect: {
-      state: 'warning',
-      content: Vue.t('deptRunType.tip.noselect')
-    },
-    del_success: {
-      state: 'success',
-      content: Vue.t('deptRunType.tip.del_success')
-    }
-  },
+  selectedRows: [],
   emapDatatable: {
     pagePath: service.api.getList_meta,
     url: service.api.getList,

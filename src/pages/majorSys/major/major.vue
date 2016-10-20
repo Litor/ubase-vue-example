@@ -1,7 +1,12 @@
 <template>
   <section>
-    <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-    <button-list :button-list="pageopt.buttonList"></button-list>
+    <simple-search v-ref:simplesearch :placeholder="$t('major.simpleSearch.placeholder')" :search-event="'major:search:top'"></simple-search>
+    <div class="bh-mv-16">
+      <bh-button type="primary" @click="add" :small="false">{{$t('major.buttonList.add')}}</bh-button>
+      <bh-button type="primary" @click="del" :small="false">{{$t('major.buttonList.del')}}</bh-button>
+      <bh-button type="primary" @click="importt" :small="false">{{$t('major.buttonList.import')}}</bh-button>
+      <bh-button type="primary" @click="exportt" :small="false">{{$t('major.buttonList.export')}}</bh-button>
+    </div>
     <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
   </section>
 </template>
@@ -9,10 +14,10 @@
 import service from './major.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapGrid, simpleSearch, buttonList },
+  components: { EmapGrid, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -24,11 +29,49 @@ export default {
 
   ready() {
     var self = this;
-    $(this.$el).on('click', '.opt-button', function(e) {
+    $(this.$el).on('click', '.card-opt-button', function(e) {
       var row = $(this).data('row');
       var event = $(this).attr('data-event');
       self.$dispatch(event, row);
     })
+  },
+
+  methods: {
+    add() {
+      Vue.paperDialog({
+        currentView: 'majorAddOrEdit',
+        title: Vue.t('major.paperDialog.add_title')
+      })
+    },
+
+    del() {
+      var checked = this.$refs.grid.getGrid().checkedRecords()
+      this.pageopt.selectedRows = checked
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('major.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('major.toast.del'),
+        okEvent: 'major:tipdialog:del'
+      })
+    },
+
+    importt() {
+      Vue.dialog({
+        currentView: 'major.vue',
+        okEvent: '_SUBPAGE_SAVE_EVENT_',
+        title: Vue.t('major.dialog.title')
+      })
+    },
+
+    exportt() {
+      console.log('export')
+    }
   },
 
   events: {
@@ -37,57 +80,43 @@ export default {
       this.$refs.grid.reload({ searchContent: keyword })
     },
 
-    'major:buttonlist:add': function() {
-      this.pageopt.paperDialog.title = Vue.t('major.paperDialog.add_title')
-      this.pageopt.paperDialog.currentView = 'majorAddOrEdit'
-      Vue.paperDialog(this)
-    },
-
-    'major:buttonlist:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
     'major:grid:detail': function(row) {
-      this.pageopt.propertyDialog.title = Vue.t('major.propertyDialog.detail_title')
-      Vue.propertyDialog(this)
-      this.$broadcast('majorDetail:setvalue', row)
-    },
-
-    'major:buttonlist:import': function() {
-      Vue.dialog(this)
-    },
-
-    'major:buttonlist:export': function() {
-
+      Vue.propertyDialog({
+        currentView: 'majorDetail',
+        okEvent: '_SUBPAGE_SAVE_EVENT_',
+        title: row['name'],
+        footerShow: false
+      })
+      Vue.broadcast('majorDetail:setvalue', row)
     },
 
     'major:grid:edit': function(row) {
-      this.pageopt.paperDialog.title = Vue.t('major.paperDialog.edit_title')
-      this.pageopt.paperDialog.currentView = 'majorAddOrEdit'
-      Vue.paperDialog(this)
-      this.$broadcast('majorAddOrEdit:setvalue', row)
+      Vue.paperDialog({
+        currentView: 'majorAddOrEdit',
+        title: Vue.t('major.paperDialog.edit_title')
+      })
+      Vue.broadcast('majorAddOrEdit:setvalue', row)
     },
 
     'major:grid:del': function(row) {
       service.delete([row.wid]).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('major.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },
 
     'major:grid:direction': function(row) {
-      this.pageopt.paperDialog.title = Vue.t('major.paperDialog.majorDirection_setting')
-      this.pageopt.paperDialog.currentView = 'majorDirection'
-      Vue.paperDialog(this)
+      Vue.paperDialog({
+        currentView: 'majorDirection',
+        title: Vue.t('major.paperDialog.majorDirection_setting')
+      })
     },
 
     'major:tipdialog:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
+      var checked = this.pageopt.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {
@@ -95,7 +124,10 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('major.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },

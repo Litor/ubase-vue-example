@@ -1,7 +1,6 @@
 # ubase-vue-example
 vue application based ubase-vue
 
-
 ## 应用目录结构
 ```
 src/
@@ -23,7 +22,9 @@ src/
 │   │   ├── page2.vue
 │   │   ├── page2.vuex.js
 │   │   └── ···
-│   └── ···/
+│   ├── config.json
+│   ├── routes.js
+│   └── index.html
 ├── app2/
 │   ├── page21/
 │   │   ├── page21.i18n.js
@@ -37,13 +38,25 @@ src/
 │   │   ├── pag22.vue
 │   │   ├── pag22.vuex.js
 │   │   └── ···
-│   └── ···/
+│   ├── config.json
+│   ├── routes.js
+│   └── index.html
 └── statics/
 ```
 
 ## 支持弹框类型(5种)
 
 ### 纸质弹框
+#### Properties（vuex中配置属性）
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| currentView | 组件名称 | String | '' | 纸质弹框中需要显示的vue组件名称（框架通过动态组件加载）|
+| title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
+
+#### 纸质弹框手动隐藏
+Vue.paperDialog('hide')
+
 ### 属性弹框
 ### 对话框
 ### tip弹框

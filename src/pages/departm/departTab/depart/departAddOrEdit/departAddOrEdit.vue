@@ -37,7 +37,10 @@ export default {
       }
       var info = this.$refs.form.getValue()
       service.xxdwSave(info).then(({ data }) => {
-        Vue.tip(this, 'save_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('departAddOrEdit.tip.save_success')
+        })
         Vue.paperDialog('hide')
       })
     }
@@ -49,13 +52,16 @@ export default {
     },
     'departAddOrEdit:save': function() {
       var ret = this.$refs.form.validate()
-      console.log(ret)
+
       if (!ret) {
         return
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
-        Vue.tip(this, 'save_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('departAddOrEdit.tip.save_success')
+        })
         Vue.propertyDialog('hide')
       })
     }

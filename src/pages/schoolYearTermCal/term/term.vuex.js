@@ -2,55 +2,6 @@ import service from './term.service';
 
 // init state
 export const state = {
-  title: Vue.t('term.title'),
-  paperDialog: {
-    currentView: 'term',
-    title: Vue.t('term.paperDialog.add_title')
-  },
-  propertyDialog: {
-    currentView: 'termAddOrEdit',
-    okEvent: '_SUBPAGE_SAVE_EVENT_',
-    title: Vue.t('term.propertyDialog.title')
-  },
-  dialog: {
-    currentView: 'term',
-    okEvent: '_SUBPAGE_SAVE_EVENT_',
-    title: Vue.t('term.dialog.title')
-  },
-  buttonList: [{
-    text: Vue.t('term.buttonList.add'),
-    clickEvent: 'term:buttonlist:add',
-    icon: 'add',
-    primary: true
-  }, {
-    text: Vue.t('term.buttonList.del'),
-    clickEvent: 'term:buttonlist:del'
-  }, {
-    text: Vue.t('term.buttonList.import'),
-    clickEvent: 'term:buttonlist:import'
-  }],
-  simpleSearch: {
-    placeholder: Vue.t('term.simpleSearch.placeholder'),
-    text: Vue.t('term.simpleSearch.text'),
-    searchEvent: 'term:search:top'
-  },
-  toast: {
-    del: {
-      type: 'warning',
-      title: Vue.t('term.toast.del'),
-      okEvent: 'term:tipdialog:del'
-    }
-  },
-  tip: {
-    noselect: {
-      state: 'warning',
-      content: Vue.t('term.tip.noselect')
-    },
-    del_success: {
-      state: 'success',
-      content: Vue.t('term.tip.del_success')
-    }
-  },
   selectedRows: [],
   emapDatatable: {
     pagePath: service.api.getList_meta,

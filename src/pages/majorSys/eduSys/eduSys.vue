@@ -1,7 +1,10 @@
 <template>
   <section>
-    <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-    <button-list :button-list="pageopt.buttonList"></button-list>
+    <simple-search v-ref:simplesearch :placeholder="$t('eduSys.simpleSearch.placeholder')" :search-event="'eduSys:search:top'"></simple-search>
+    <div class="bh-mv-16">
+      <bh-button type="primary" @click="add" :small="false">{{$t('eduSys.buttonList.add')}}</bh-button>
+      <bh-button type="primary" @click="del" :small="false">{{$t('eduSys.buttonList.del')}}</bh-button>
+    </div>
     <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
   </section>
 </template>
@@ -9,10 +12,10 @@
 import service from './eduSys.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
-import buttonList from 'bh-vue/button-list/buttonList.vue'
+import bhButton from 'bh-vue/bh-button/bhButton.vue'
 
 export default {
-  components: { EmapGrid, simpleSearch, buttonList },
+  components: { EmapGrid, simpleSearch, bhButton },
 
   vuex: {
     getters: {
@@ -24,11 +27,38 @@ export default {
 
   ready() {
     var self = this;
-    $(this.$el).on('click', '.opt-button', function(e) {
+    $(this.$el).on('click', '.card-opt-button', function(e) {
       var row = $(this).data('row');
       var event = $(this).attr('data-event');
       self.$dispatch(event, row);
     })
+  },
+
+  methods: {
+    add() {
+      Vue.propertyDialog({
+        currentView: 'eduSysAddOrEdit',
+        okEvent: 'eduSysAddOrEdit:save',
+        title: Vue.t('eduSys.propertyDialog.add_title')
+      })
+    },
+    
+    del() {
+      var checked = this.$refs.grid.getGrid().checkedRecords()
+      this.pageopt.willDeleteWids = checked
+      if (checked.length === 0) {
+        Vue.tip({
+          state: 'warning',
+          content: Vue.t('eduSys.tip.noselect')
+        })
+        return
+      }
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('eduSys.toast.del'),
+        okEvent: 'eduSys:tipdialog:del'
+      })
+    }
   },
 
   events: {
@@ -37,35 +67,26 @@ export default {
       this.$refs.grid.reload({ searchContent: keyword })
     },
 
-    'eduSys:buttonlist:add': function() {
-      this.pageopt.propertyDialog.title = Vue.t('eduSys.propertyDialog.add_title')
-      Vue.propertyDialog(this)
-    },
-
-    'eduSys:buttonlist:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
-      if (checked.length === 0) {
-        Vue.tip(this, 'noselect')
-        return
-      }
-      Vue.toast(this, 'del')
-    },
-
     'eduSys:grid:edit': function(row) {
-      this.pageopt.propertyDialog.title = Vue.t('eduSys.propertyDialog.edit_title')
-      Vue.propertyDialog(this)
-      this.$broadcast('eduSysAddOrEdit:setvalue', row)
+      Vue.propertyDialog({
+        currentView: 'eduSysAddOrEdit',
+        okEvent: 'eduSysAddOrEdit:save',
+        title: Vue.t('eduSys.propertyDialog.edit_title')
+      })
+      Vue.broadcast('eduSysAddOrEdit:setvalue', row)
     },
 
     'eduSys:grid:del': function(row) {
-      service.delete([row.wid]).then(({ data }) => {
-        Vue.tip(this, 'del_success')
-        this.$refs.grid.reload()
+      this.pageopt.willDeleteWids = [row]
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('eduSys.toast.del'),
+        okEvent: 'eduSys:tipdialog:del'
       })
     },
 
     'eduSys:tipdialog:del': function() {
-      var checked = this.$refs.grid.checkedRecords()
+      var checked = this.pageopt.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {
@@ -73,7 +94,10 @@ export default {
       })
 
       service.delete(wids).then(({ data }) => {
-        Vue.tip(this, 'del_success')
+        Vue.tip({
+          state: 'success',
+          content: Vue.t('eduSys.tip.del_success')
+        })
         this.$refs.grid.reload()
       })
     },
