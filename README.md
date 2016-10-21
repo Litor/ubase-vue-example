@@ -166,12 +166,12 @@ Vue.toast({
 
 ## 事件触发方式
 ```
-Vue.broadcast('campusaddoredit:setvalue', row)
+Vue.broadcast('module1:setvalue', row)  // module1:setvalue定义在vue文件中的events中
 ```
 
 ## state更新方式
 ```
-Vue.updateState('depart', {'emapCard.params': {a: 1}, 'title': '标题'})
+Vue.updateState('test', {'emapCard.params': {a: 1}, 'title': '标题'}) // test表示要更新test.vuex.js中的state
 ```
 
 ## Setup
