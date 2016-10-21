@@ -168,6 +168,12 @@ Vue.toast({
 ```
 Vue.broadcast('campusaddoredit:setvalue', row)
 ```
+
+## state更新方式
+```
+Vue.updateState('depart', {'emapCard.params': {a: 1}, 'title': '标题'})
+```
+
 ## Setup
 
 ### clone
