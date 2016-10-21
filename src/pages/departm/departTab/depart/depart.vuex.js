@@ -1,6 +1,5 @@
 import service from './depart.service';
 
-// init state
 export const state = {
   emapGrid: {
     pagePath: service.api.getList_meta,
@@ -49,9 +48,4 @@ export const state = {
       }]
     }
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

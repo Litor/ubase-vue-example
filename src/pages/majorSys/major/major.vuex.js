@@ -1,5 +1,5 @@
 import service from './major.service';
-// init state
+
 export const state = {
   willDeleteWids: [],
   emapGrid: {
@@ -39,10 +39,4 @@ export const state = {
       }]
     }
   }
-};
-
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

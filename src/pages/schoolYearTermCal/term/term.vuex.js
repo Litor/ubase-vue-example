@@ -1,6 +1,5 @@
 import service from './term.service';
 
-// init state
 export const state = {
   selectedRows: [],
   emapDatatable: {
@@ -39,9 +38,4 @@ export const state = {
       }]
     }
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

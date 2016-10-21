@@ -1,6 +1,5 @@
 import service from './majorDirectionAddOrEdit.service';
 
-// init state
 export const state = {
   options: {
     pagePath: service.api.addOrEdit_meta,
@@ -10,9 +9,4 @@ export const state = {
     model: 'v'
   },
   outline: false
-};
-
-// actions
-export const setFormReadOnly = ({ actions, dispatch }, readonly) => {
-  state.options.readonly = readonly;
 };

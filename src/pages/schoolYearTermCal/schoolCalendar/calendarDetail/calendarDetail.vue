@@ -14,7 +14,6 @@
 </template>
 <script>
 import service from './calendarDetail.service'
-import { getCalendarProfile, getCalendarDetail } from './calendarDetail.vuex'
 
 export default {
   components: {},
@@ -24,18 +23,18 @@ export default {
       pageopt: function(state) {
         return state.calendarDetail
       }
-    },
-
-    actions: {
-      getCalendarProfile,
-      getCalendarDetail
     }
   },
 
   events: {
     'calendardetail:init': function(wid) {
-      this.getCalendarProfile(wid)
-      this.getCalendarDetail(wid)
+      Promise.all([service.getByWid(wid), service.getDateEventByCalendarWid(wid)]).then(function(res) {
+        console.log(res)
+        Vue.updateState('calendarDetail', {
+          'calendarProfile': res[0],
+          'calendarDetail': res[1]
+        })
+      })
     }
   }
 }

@@ -1,6 +1,5 @@
 import service from './majorDirection.service';
 
-// init state
 export const state = {
   emapCard: {
     pagePath: service.api.getList_meta,
@@ -9,9 +8,4 @@ export const state = {
     pageable: false,
     template: require('./cardTpl.html')
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

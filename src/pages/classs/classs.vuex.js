@@ -1,6 +1,5 @@
 import service from './classs.service';
 
-// init state
 export const state = {
   selectedRows: [],
   emapGrid: {
@@ -40,9 +39,4 @@ export const state = {
       }]
     }
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

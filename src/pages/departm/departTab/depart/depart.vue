@@ -10,7 +10,6 @@
   </section>
 </template>
 <script>
-import { setDepartFormReadOnly } from './departAddOrEdit/departAddOrEdit.vuex'
 import service from './depart.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -24,9 +23,7 @@ export default {
       pageopt: function(state) {
         return state.depart
       },
-    },
-
-    actions: { setDepartFormReadOnly }
+    }
   },
 
   ready() {
@@ -40,7 +37,7 @@ export default {
 
   methods: {
     add() {
-      this.setDepartFormReadOnly(false)
+      Vue.updateState('departAddOrEdit', { 'options.readonly': false })
       this.pageopt.paperDialog.title = Vue.t('depart.paperDialog.add_title')
       Vue.paperDialog({
         currentView: 'departAddOrEdit',

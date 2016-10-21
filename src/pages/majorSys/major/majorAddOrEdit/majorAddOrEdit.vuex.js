@@ -1,6 +1,5 @@
 import service from './majorAddOrEdit.service';
 
-// init state
 export const state = {
   options: {
     pagePath: service.api.addOrEdit_meta,
@@ -10,9 +9,4 @@ export const state = {
     model: 'v'
   },
   outline: false
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

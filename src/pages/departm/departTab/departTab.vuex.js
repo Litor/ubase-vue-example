@@ -1,6 +1,5 @@
 import service from './departTab.service';
 
-// initial state
 export const state = {
   tabs: [
     { title: Vue.t('departTab.departCategory'), component: 'departCategory' },
@@ -9,7 +8,3 @@ export const state = {
   ]
 };
 
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
-};

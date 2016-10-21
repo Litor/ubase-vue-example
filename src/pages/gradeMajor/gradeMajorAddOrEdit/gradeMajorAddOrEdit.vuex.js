@@ -1,6 +1,5 @@
 import service from './gradeMajorAddOrEdit.service';
 
-// init state
 export const state = {
   selectedRows: [],
   emapGrid: {
@@ -23,9 +22,4 @@ export const state = {
     sortable: true,
     columnsReorder: true
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };

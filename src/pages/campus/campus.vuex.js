@@ -1,6 +1,5 @@
 import service from './campus.service';
 
-// init state
 export const state = {
   willDeleteWids: [],
   emapDatatable: {
@@ -35,9 +34,4 @@ export const state = {
       }]
     }
   }
-};
-
-// actions
-export const setTitle = ({ actions, dispatch }, title) => {
-  state.title = title;
 };
