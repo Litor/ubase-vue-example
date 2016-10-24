@@ -22,7 +22,7 @@ vue application based ubase-vue
 * 设置npm国内镜像，命令行执行: `npm config set registry https://registry.npm.taobao.org`
 * 安装基础库，命令行执行：`npm install -g gulp yo`
 * 安装ubase脚手架，命令行执行：`npm install -g generator-vum`
-* 下载[sublime text3](http://res.wisedu.com/FS/tools/sublime%20text%20new.zip)前端编辑器，解压后直接使用，无需安装
+* 下载[sublime text3](http://res.wisedu.com/FS/tools/sublime%20text%20vue.zip)前端编辑器，解压后直接使用，无需安装
 
 ## 快速入门
 
