@@ -1,6 +1,37 @@
 # ubase-vue-example
 vue application based ubase-vue
 
+## Table of contents
+* [前端基础入门](#starting)
+* [准备工作](#prepare)
+* [快速入门](#quick-start)
+* [应用目录结构](#structure)
+* [config.json配置项说明](#config)
+* [gulpfile.babel.js配置说明](#gulp)
+* [支持弹框类型(5种)](#dialog)
+* [事件触发方式](#event)
+* [state更新方式](#state)
+
+
+## 前端基础入门
+* [vue组件文档](http://res.wisedu.com/FS/vue-doc/module-utils_pageUtil.html)
+* [vue官方api文档](http://cn.vuejs.org/api/)
+
+## 准备工作
+* 安装nodejs环境 -[for windows](http://res.wisedu.com/FS/tools/node-v5.6.0-x64.msi) | -[for mac](http://res.wisedu.com/FS/tools/node-v6.3.0.pkg)
+* 设置npm国内镜像，命令行执行: `npm config set registry https://registry.npm.taobao.org`
+* 安装基础库，命令行执行：`npm install -g gulp yo`
+* 安装ubase脚手架，命令行执行：`npm install -g generator-vum`
+* 下载[sublime text3](http://res.wisedu.com/FS/tools/sublime%20text%20new.zip)前端编辑器，解压后直接使用，无需安装
+
+## 快速入门
+
+* 生成APP目录结构，进入项目待存放目录，打开命令行执行：yo vum，选择ubase选项->输入项目名称->回车
+* 生成APP页面， 进入第一步生成的src/pages/文件夹，打开命令行执行：yo vum，选择页面类型 -> 回答是否是主页面(app就一个主页面) -> 输入页面名称（名称由字母组成）->回车
+
+* 当前目录命令行下执行gulp命令.
+* 打开浏览器进入 http://localhost:8081 查看.
+
 ## 应用目录结构
 ```
 src/
@@ -42,6 +73,57 @@ src/
 │   ├── routes.js
 │   └── index.html
 └── statics/
+```
+
+## config.json配置项说明
+```
+{
+  "APP_NAME": "应用名称", // app的名称，网页标题和页面顶部都显示该名称
+  "BH_VERSION": "1.2", // 设置bh的版本 bh目前都使用1.2版本
+  "LANG": "cn", // 设置国际化语言
+  "MINI_MODE": false, // 设置是否使用mini模式展示， mini模式是展示页面主题部分
+  "HEADER": { //  头部配置项
+    "dropMenu": [{
+      "text": "就业资讯师",
+      "active": true
+    }, {
+      "text": "就业管理人员"
+    }],
+    "logo": "http://res.wisedu.com/scenes/public/images/demo/logo.png",
+    "icons": ["icon-apps"],
+    "userImage": "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+    "userInfo": {
+      "image": "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+      "info": [
+        "01118888",
+        "张晓明  男",
+        "南京理工大学  信息化办公室",
+        "zhangxm@wisedu.com",
+        "18888888888"
+      ],
+      "logoutHref": "javascript:void(0);"
+    }
+  }
+}
+```
+
+## gulpfile.babel.js配置说明
+```
+{
+  // 配置别名
+  alias: {
+    'components': path.resolve(__dirname, './src/components')
+  },
+
+  // 端口
+  port: '8081',
+
+  // meta地址
+  metaInfoUrl: 'http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/',
+
+  // mock server代理
+  proxy: [{ source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' }]
+}
 ```
 
 ## 支持弹框类型(5种)
