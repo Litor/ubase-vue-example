@@ -31,7 +31,10 @@ export default {
       }
       var info = this.$refs.form.getValue()
       service.addOrEdit(info).then(({ data }) => {
-        Vue.tip(this, 'save_success')
+        Vue.tip( {
+          state: 'success',
+          content: Vue.t('teachGroupAddOrEdit.tip.save_success')
+        })
         Vue.propertyDialog('hide')
       })
     }

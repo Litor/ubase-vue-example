@@ -1,6 +1,5 @@
 import service from './teachGroupAddOrEdit.service';
 
-// init state
 export const state = {
   title: Vue.t('teachGroupAddOrEdit.title'),
   options: {
@@ -10,16 +9,5 @@ export const state = {
     readonly: false,
     model: 'v'
   },
-  tip: {
-    save_success: {
-      state: 'success',
-      content: Vue.t('teachGroupAddOrEdit.tip.save_success')
-    }
-  },
   outline: false
-};
-
-// actions
-export const setFormReadOnly = ({ actions, dispatch }, readonly) => {
-  state.options.readonly = readonly;
 };
