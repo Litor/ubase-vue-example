@@ -5,10 +5,10 @@
       <bh-button type="primary" @click="add" :small="false">{{$t('eduSys.buttonList.add')}}</bh-button>
       <bh-button type="primary" @click="del" :small="false">{{$t('eduSys.buttonList.del')}}</bh-button>
     </div>
-    <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
+    <emap-grid :options='pageState.emapGrid' v-ref:grid></emap-grid>
   </section>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './eduSys.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -19,7 +19,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.eduSys
       },
     }
@@ -45,7 +45,7 @@ export default {
     
     del() {
       var checked = this.$refs.grid.getGrid().checkedRecords()
-      this.pageopt.willDeleteWids = checked
+      this.pageState.willDeleteWids = checked
       if (checked.length === 0) {
         Vue.tip({
           state: 'warning',
@@ -77,7 +77,7 @@ export default {
     },
 
     'eduSys:grid:del': function(row) {
-      this.pageopt.willDeleteWids = [row]
+      this.pageState.willDeleteWids = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('eduSys.toast.del'),
@@ -86,7 +86,7 @@ export default {
     },
 
     'eduSys:tipdialog:del': function() {
-      var checked = this.pageopt.willDeleteWids
+      var checked = this.pageState.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {

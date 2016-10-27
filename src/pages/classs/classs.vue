@@ -8,11 +8,11 @@
         <bh-button type="primary" @click="del" :small="false">{{$t('classs.buttonList.del')}}</bh-button>
         <bh-button type="primary" @click="importt" :small="false">{{$t('classs.buttonList.import')}}</bh-button>
       </div>
-      <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
+      <emap-grid :options='pageState.emapGrid' v-ref:grid></emap-grid>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './classs.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -23,7 +23,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.classs
       },
     }
@@ -40,13 +40,13 @@ export default {
 
   methods: {
     add() {
-      this.pageopt.paperDialog.title = Vue.t('classs.paperDialog.add_title')
+      this.pageState.paperDialog.title = Vue.t('classs.paperDialog.add_title')
       Vue.paperDialog(this)
     },
 
     del() {
       var checked = this.$refs.grid.getGrid().checkedRecords()
-      this.pageopt.selectedRows = checked
+      this.pageState.selectedRows = checked
       if (checked.length === 0) {
         Vue.tip({
           state: 'warning',
@@ -93,7 +93,7 @@ export default {
     },
 
     'classs:grid:del': function(row) {
-      this.pageopt.selectedRows = [row]
+      this.pageState.selectedRows = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('classs.toast.del'),
@@ -102,7 +102,7 @@ export default {
     },
 
     'classs:tipdialog:del': function() {
-      var checked = this.pageopt.selectedRows
+      var checked = this.pageState.selectedRows
       var wids = []
 
       checked.forEach((item) => {
@@ -139,7 +139,7 @@ export default {
     },
 
     'classs:card:del': function(row) {
-      this.pageopt.selectedRows = [row]
+      this.pageState.selectedRows = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('classs.toast.del'),

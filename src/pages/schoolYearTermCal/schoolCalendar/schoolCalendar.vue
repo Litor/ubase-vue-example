@@ -4,10 +4,10 @@
     <div class="bh-mv-16">
       <bh-button type="primary" @click="add" :small="false">{{$t('schoolCalendar.buttonList.add')}}</bh-button>
     </div>
-    <emap-card :options='pageopt.emapCard' v-ref:table></emap-card>
+    <emap-card :options='pageState.emapCard' v-ref:table></emap-card>
   </section>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './schoolCalendar.service'
 import EmapCard from 'bh-vue/emap-card/emapCard.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -18,7 +18,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.schoolCalendar
       }
     }

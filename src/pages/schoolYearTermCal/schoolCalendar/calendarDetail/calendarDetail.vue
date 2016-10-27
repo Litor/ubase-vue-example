@@ -1,18 +1,18 @@
 <template>
   <article bh-layout-role="single">
     <h2>
-      <span v-html="pageopt.calendarProfile.schoolYear"></span>
-      <span v-html="pageopt.calendarProfile.term" class="title-term"></span>
-      <a href="javascript:void(0);" class="bh-tag bh-tag-warning current-term" v-if="pageopt.calendarProfile.isThisTerm">当前学期</a>
+      <span v-html="pageState.calendarProfile.schoolYear"></span>
+      <span v-html="pageState.calendarProfile.term" class="title-term"></span>
+      <a href="javascript:void(0);" class="bh-tag bh-tag-warning current-term" v-if="pageState.calendarProfile.isThisTerm">当前学期</a>
     </h2>
     <section>
-      <input type="" name="" v-model="pageopt.year" number>
-      <input type="" name="" v-model="pageopt.month" number>
-      <calendar :year='pageopt.year' :month="pageopt.month"></calendar>
+      <input type="" name="" v-model="pageState.year" number>
+      <input type="" name="" v-model="pageState.month" number>
+      <calendar :year='pageState.year' :month="pageState.month"></calendar>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './calendarDetail.service'
 
 export default {
@@ -20,7 +20,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.calendarDetail
       }
     }

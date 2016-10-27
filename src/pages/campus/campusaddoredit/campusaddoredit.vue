@@ -1,7 +1,7 @@
 <template>
-  <emap-form v-ref:form offset-top=0 :options="pageopt.options" :outline="pageopt.outline"></emap-form>
+  <emap-form v-ref:form offset-top=0 :options="pageState.options" :outline="pageState.outline"></emap-form>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './campusaddoredit.service'
 import EmapForm from 'bh-vue/emap-form/emapForm.vue'
 
@@ -10,7 +10,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.campusaddoredit
       }
     }

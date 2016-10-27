@@ -9,11 +9,11 @@
         <bh-button type="primary" @click="importt" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.import')}}</bh-button>
         <bh-button type="primary" @click="exportt" :small="false">{{$t('gradeMajorAddOrEdit.buttonList.export')}}</bh-button>
       </div>
-      <emap-grid :options='pageopt.emapGrid' v-ref:grid></emap-grid>
+      <emap-grid :options='pageState.emapGrid' v-ref:grid></emap-grid>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './gradeMajorAddOrEdit.service'
 import EmapGrid from 'bh-vue/emap-grid/emapGrid.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -24,7 +24,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.gradeMajorAddOrEdit
       },
     }
@@ -40,7 +40,7 @@ export default {
 
     del() {
       var checked = this.$refs.grid.getGrid().checkedRecords()
-      this.pageopt.selectedRows = checked
+      this.pageState.selectedRows = checked
       if (checked.length === 0) {
         Vue.tip({
           state: 'warning',
@@ -75,7 +75,7 @@ export default {
     },
 
     'gradeMajorAddOrEdit:grid:detail': function(row) {
-      this.pageopt.propertyDialog.title = row['name']
+      this.pageState.propertyDialog.title = row['name']
       Vue.propertyDialog({
         currentView: 'gradeMajorAddOrEdit',
         okEvent: '_SUBPAGE_SAVE_EVENT_',
@@ -93,7 +93,7 @@ export default {
     },
 
     'gradeMajorAddOrEdit:grid:del': function(row) {
-      this.pageopt.willDeleteWids = [row]
+      this.pageState.willDeleteWids = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('gradeMajorAddOrEdit.toast.del'),
@@ -102,7 +102,7 @@ export default {
     },
 
     'gradeMajorAddOrEdit:tipdialog:del': function() {
-      var checked = this.pageopt.willDeleteWids
+      var checked = this.pageState.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {

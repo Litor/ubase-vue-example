@@ -7,11 +7,11 @@
         <bh-button type="primary" @click="add" :small="false">{{$t('campus.buttonList.add')}}</bh-button>
         <bh-button type="primary" @click="del" :small="false">{{$t('campus.buttonList.del')}}</bh-button>
       </div>
-      <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
+      <emap-datatable :options='pageState.emapDatatable' v-ref:table></emap-datatable>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './campus.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -22,7 +22,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.campus
       },
     }
@@ -39,7 +39,7 @@ export default {
 
     del() {
       var checked = this.$refs.table.checkedRecords()
-      this.pageopt.willDeleteWids = checked
+      this.pageState.willDeleteWids = checked
       if (checked.length === 0) {
         Vue.tip({
           state: 'warning',
@@ -70,7 +70,7 @@ export default {
     },
 
     'campus:table:del': function(row) {
-      this.pageopt.willDeleteWids = [{ wid: row.wid }]
+      this.pageState.willDeleteWids = [{ wid: row.wid }]
       Vue.toast({
         type: 'warning',
         title: Vue.t('campus.toast.del'),
@@ -79,12 +79,12 @@ export default {
     },
 
     'campus:tipdialog:del': function() {
-      var checked = this.pageopt.willDeleteWids
+      var checked = this.pageState.willDeleteWids
       var wids = []
 
       checked.forEach((item) => {
         wids.push(item.wid)
-      })
+      });
 
       service.delete(wids).then(({ data }) => {
         Vue.tip({
@@ -92,7 +92,7 @@ export default {
           content: Vue.t('campus.tip.del_success')
         })
         this.$refs.table.reload()
-      })
+      });
     }
   }
 }

@@ -2,11 +2,11 @@
   <article bh-layout-role="single">
     <h2>{{$t('departTab.title')}}</h2>
     <section>
-      <comp-tab :tabs="pageopt.tabs"></comp-tab>
+      <comp-tab :tabs="pageState.tabs"></comp-tab>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import compTab from 'bh-vue/comp-tab/compTab.vue'
 
 export default {
@@ -14,7 +14,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.departTab;
       }
     }

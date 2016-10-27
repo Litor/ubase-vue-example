@@ -7,11 +7,11 @@
         <bh-button type="primary" @click="add" :small="false">{{$t('grade.buttonList.add')}}</bh-button>
         <bh-button type="primary" @click="del" :small="false">{{$t('grade.buttonList.del')}}</bh-button>
       </div>
-      <emap-card :options='pageopt.emapCard' v-ref:table></emap-card>
+      <emap-card :options='pageState.emapCard' v-ref:table></emap-card>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './grade.service'
 import EmapCard from 'bh-vue/emap-card/emapCard.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -22,7 +22,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.grade
       }
     }

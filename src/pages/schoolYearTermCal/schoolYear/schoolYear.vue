@@ -6,10 +6,10 @@
       <bh-button type="primary" @click="del" :small="false">{{$t('schoolYear.buttonList.del')}}</bh-button>
       <bh-button type="primary" @click="importt" :small="false">{{$t('schoolYear.buttonList.import')}}</bh-button>
     </div>
-    <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
+    <emap-datatable :options='pageState.emapDatatable' v-ref:table></emap-datatable>
   </section>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './schoolYear.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -20,7 +20,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.schoolYear
       },
     }
@@ -37,7 +37,7 @@ export default {
 
     del() {
       var checked = this.$refs.table.checkedRecords()
-      this.pageopt.selectedRows = checked
+      this.pageState.selectedRows = checked
       if (checked.length === 0) {
         Vue.tip({
           state: 'warning',
@@ -81,7 +81,7 @@ export default {
     },
 
     'schoolYear:table:del': function(row) {
-      this.pageopt.selectedRows = [row]
+      this.pageState.selectedRows = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('schoolYear.toast.del'),
@@ -90,7 +90,7 @@ export default {
     },
 
     'schoolYear:tipdialog:del': function() {
-      var checked = this.pageopt.selectedRows
+      var checked = this.pageState.selectedRows
       var wids = []
 
       checked.forEach((item) => {

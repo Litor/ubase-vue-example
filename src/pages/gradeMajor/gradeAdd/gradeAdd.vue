@@ -3,14 +3,14 @@
     <div class="bh-form-group">
       <label class="bh-form-label">选择年级：</label>
       <div class="bh-ph-8 major-select">
-        <bh-dropdown :source='pageopt.search.source' :current.sync='pageopt.search.current' display-member='name' value-member='wid' @change='onselect'></bh-dropdown>
+        <bh-dropdown :source='pageState.search.source' :current.sync='pageState.search.current' display-member='name' value-member='wid' @change='onselect'></bh-dropdown>
       </div>
     </div>
-    <bh-choose v-ref:choose1 :left-source-url='pageopt.leftSource.url' :left-source-action="pageopt.leftSource.root" :leftcells-renderer='leftcellsRenderer' :id="pageopt.leftSource.id" :right-source-url='pageopt.leftSource.url' :rightcells-renderer='leftcellsRenderer' :right-source-action="pageopt.leftSource.root" :nicescroll="false">
+    <bh-choose v-ref:choose1 :left-source-url='pageState.leftSource.url' :left-source-action="pageState.leftSource.root" :leftcells-renderer='leftcellsRenderer' :id="pageState.leftSource.id" :right-source-url='pageState.leftSource.url' :rightcells-renderer='leftcellsRenderer' :right-source-action="pageState.leftSource.root" :nicescroll="false">
     </bh-choose>
   </section>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './gradeAdd.service'
 import BhChoose from 'bh-vue/bh-choose/bhChoose.vue'
 import bhDropdown from 'bh-vue/bh-dropdown/bhDropdown.vue'
@@ -20,7 +20,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.gradeAdd
       },
     }

@@ -5,10 +5,10 @@
       <bh-button type="primary" @click="add" :small="false">{{$t('deptRunType.buttonList.add')}}</bh-button>
       <bh-button type="primary" @click="del" :small="false">{{$t('deptRunType.buttonList.del')}}</bh-button>
     </div>
-    <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
+    <emap-datatable :options='pageState.emapDatatable' v-ref:table></emap-datatable>
   </section>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './deptRunType.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -19,7 +19,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.deptRunType
       },
     }
@@ -27,7 +27,7 @@ export default {
 
   methods: {
     add() {
-      this.pageopt.propertyDialog.title = Vue.t('deptRunType.propertyDialog.add_title')
+      this.pageState.propertyDialog.title = Vue.t('deptRunType.propertyDialog.add_title')
       Vue.propertyDialog({
         currentView: 'deptRunTypeAddOrEdit',
         okEvent: 'deptRunTypeAddOrEdit:save',
@@ -68,7 +68,7 @@ export default {
     },
 
     'deptRunType:table:del': function(row) {
-      this.pageopt.selectedRows = [row]
+      this.pageState.selectedRows = [row]
       Vue.toast({
         type: 'warning',
         title: Vue.t('deptRunType.toast.del'),

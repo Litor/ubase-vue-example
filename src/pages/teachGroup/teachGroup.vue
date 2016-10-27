@@ -1,14 +1,14 @@
 <template>
   <article bh-layout-role="single">
-    <h2 v-html="pageopt.title"></h2>
+    <h2 v-html="pageState.title"></h2>
     <section>
-      <simple-search v-ref:simplesearch :simple-search="pageopt.simpleSearch"></simple-search>
-      <button-list :button-list="pageopt.buttonList"></button-list>
-      <emap-datatable :options='pageopt.emapDatatable' v-ref:table></emap-datatable>
+      <simple-search v-ref:simplesearch :simple-search="pageState.simpleSearch"></simple-search>
+      <button-list :button-list="pageState.buttonList"></button-list>
+      <emap-datatable :options='pageState.emapDatatable' v-ref:table></emap-datatable>
     </section>
   </article>
 </template>
-<script>
+<script  type="text/ecmascript-6">
 import service from './teachGroup.service'
 import EmapDatatable from 'bh-vue/emap-datatable/emapDatatable.vue'
 import simpleSearch from 'bh-vue/simple-search/simpleSearch.vue'
@@ -19,7 +19,7 @@ export default {
 
   vuex: {
     getters: {
-      pageopt: function(state) {
+      pageState: function(state) {
         return state.teachGroup
       },
     }
@@ -32,13 +32,13 @@ export default {
     },
 
     'teachGroup:buttonlist:add': function() {
-      this.pageopt.propertyDialog.title = Vue.t('teachGroup.propertyDialog.add_title')
+      this.pageState.propertyDialog.title = Vue.t('teachGroup.propertyDialog.add_title')
       Vue.propertyDialog(this)
     },
 
     'teachGroup:buttonlist:del': function() {
       var checked = this.$refs.table.checkedRecords()
-      this.pageopt.selectedRows = checked
+      this.pageState.selectedRows = checked
       if (checked.length === 0) {
         Vue.tip(this, 'noselect')
         return
@@ -51,23 +51,23 @@ export default {
     },
 
     'teachGroup:table:detail': function(row) {
-      this.pageopt.propertyDialog.title = row['name']
+      this.pageState.propertyDialog.title = row['name']
       Vue.propertyDialog(this)
     },
 
     'teachGroup:table:edit': function(row) {
-      this.pageopt.propertyDialog.title = Vue.t('teachGroup.propertyDialog.edit_title')
+      this.pageState.propertyDialog.title = Vue.t('teachGroup.propertyDialog.edit_title')
       Vue.propertyDialog(this)
       this.$broadcast('teachGroupAddOrEdit:setvalue', row)
     },
 
     'teachGroup:table:del': function(row) {
-      this.pageopt.selectedRows = [row]
+      this.pageState.selectedRows = [row]
       Vue.toast(this, 'del')
     },
 
     'teachGroup:tipdialog:del': function() {
-      var checked = this.pageopt.selectedRows
+      var checked = this.pageState.selectedRows
       var wids = []
 
       checked.forEach((item) => {
