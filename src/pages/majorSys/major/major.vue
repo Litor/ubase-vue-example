@@ -27,15 +27,6 @@ export default {
     }
   },
 
-  ready() {
-    var self = this;
-    $(this.$el).on('click', '.card-opt-button', function(e) {
-      var row = $(this).data('row');
-      var event = $(this).attr('data-event');
-      self.$dispatch(event, row);
-    })
-  },
-
   methods: {
     add() {
       Vue.paperDialog({
