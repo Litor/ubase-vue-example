@@ -8,7 +8,7 @@ vue application based ubase-vue
 * [应用目录结构](#structure)
 * [config.json配置项说明](#config)
 * [gulpfile.babel.js配置说明](#gulp)
-* [支持弹框类型(5种)](#dialog)
+* [支持弹框类型(6种)](#dialog)
 * [事件触发方式](#event)
 * [state更新方式](#state)
 
@@ -126,7 +126,7 @@ src/
 }
 ```
 
-## 支持弹框类型(5种)
+## 支持弹框类型(6种)
 
 ### 纸质弹框
 
@@ -245,6 +245,26 @@ Vue.toast({
 | cancelEvent | 取消按钮事件 | Function | -- |  |
 | cancelText | 取消按钮文字 | String | 取消 |  |
 
+
+### pop弹框
+* 打开
+```
+Vue.pop({
+    selector: event.currentTarget
+    currentView: 'departCategoryAddOrEdit',
+    width:'500px',
+    height:'400px'
+})
+```
+
+#### Properties
+
+| 名称  | 描述 | 类型 | 默认值 | 备注 |
+| ---    | ---   | ---   | ---     | ---   |
+| title | 提示标题 | String | -- |   |
+| currentView |组件名称 | String | -- | 对话框中需要显示的vue组件名称（框架通过动态组件加载）|
+| width | 宽度 | String | -- | 对话框宽度 |
+| height | 高度 | String | --' | 对话框高度 |
 
 ## 事件触发方式
 ```
