@@ -1,0 +1,27 @@
+{
+  "APP_NAME": "应用名称",
+  "BH_VERSION": "1.2",
+  "LANG": "cn",
+  "HEADER": {
+    "dropMenu": [{
+      "text": "就业资讯师",
+      "active": true
+    }, {
+      "text": "就业管理人员"
+    }],
+    "logo": "http://res.wisedu.com/scenes/public/images/demo/logo.png",
+    "icons": ["icon-apps"],
+    "userImage": "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+    "userInfo": {
+      "image": "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+      "info": [
+        "01118888",
+        "张晓明  男",
+        "南京理工大学  信息化办公室",
+        "zhangxm@wisedu.com",
+        "18888888888"
+      ],
+      "logoutHref": "javascript:void(0);"
+    }
+  }
+}

@@ -14,7 +14,9 @@ let userConfig = {
   metaInfoUrl: 'http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/',
 
   // mock server代理
-  proxy: [{ source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' }]
+  proxy: [{ source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' },
+    { source: '/yxxzry-apps-web', target: 'http://res.wisedu.com:8000' },
+    { source: '/iap-mngt', target: 'http://res.wisedu.com:8000' }]
 };
 
 ubaseGulp(path, userConfig);
