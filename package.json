@@ -44,13 +44,9 @@
     "scriptjs": "^2.5.8",
     "string-replace-webpack-plugin": "0.0.3",
     "style-loader": "^0.13.1",
-    "ubase-vue": "^1.0.39",
+    "ubase-vue": "^1.0.43",
     "url-loader": "^0.5.7",
     "vinyl-named": "^1.1.0",
-    "vue-hot-reload-api": "1.2.0",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^8.5.3",
-    "vue-style-loader": "^1.0.0",
     "webpack-stream": "2.1.0"
   }
 }

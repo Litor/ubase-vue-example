@@ -27,7 +27,6 @@ export default {
 
   methods: {
     add() {
-      this.pageState.propertyDialog.title = Vue.t('deptRunType.propertyDialog.add_title')
       Vue.propertyDialog({
         currentView: 'deptRunTypeAddOrEdit',
         okEvent: 'deptRunTypeAddOrEdit:save',

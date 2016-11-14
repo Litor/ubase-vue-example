@@ -20,11 +20,9 @@ import bhButton from 'bh-vue/bh-button/bhButton.vue'
 export default {
   components: { EmapDatatable, simpleSearch, bhButton },
 
-  vuex: {
-    getters: {
-      pageState: function(state) {
-        return state.campus
-      },
+  computed:{
+    pageState:function () {
+      return this.$store.state.campus
     }
   },
 
@@ -50,35 +48,11 @@ export default {
       Vue.toast({
         type: 'warning',
         title: Vue.t('campus.toast.del'),
-        okEvent: 'campus:tipdialog:del'
-      })
-    }
-  },
-
-  events: {
-    'campus:search': function() {
-      var keyword = this.$refs.simplesearch.keyword
-      this.$refs.table.reload({ searchContent: keyword })
-    },
-    'campus:table:edit': function(row) {
-      Vue.propertyDialog({
-        title: Vue.t('campus.propertyDialog.edit_title'),
-        currentView: 'campusaddoredit',
-        okEvent: 'campusaddoredit:save'
-      })
-      Vue.broadcast('campusaddoredit:setvalue', row)
-    },
-
-    'campus:table:del': function(row) {
-      this.pageState.willDeleteWids = [{ wid: row.wid }]
-      Vue.toast({
-        type: 'warning',
-        title: Vue.t('campus.toast.del'),
-        okEvent: 'campus:tipdialog:del'
+        okEvent: 'campus.tipdialogDel'
       })
     },
 
-    'campus:tipdialog:del': function() {
+    tipdialogDel(){
       var checked = this.pageState.willDeleteWids
       var wids = []
 
@@ -93,6 +67,30 @@ export default {
         })
         this.$refs.table.reload()
       });
+    }
+  },
+
+  events: {
+    'campus:search': function() {
+      var keyword = this.$refs.simplesearch.keyword
+      this.$refs.table.reload({ searchContent: keyword })
+    },
+    'campus:table:edit': function(row) {
+      Vue.propertyDialog({
+        title: Vue.t('campus.propertyDialog.edit_title'),
+        currentView: 'campusaddoredit',
+        okEvent: 'campusaddoredit.save'
+      })
+      Ubase.invoke('campusaddoredit.setValue', row)
+    },
+
+    'campus:table:del': function(row) {
+      this.pageState.willDeleteWids = [{ wid: row.wid }]
+      Vue.toast({
+        type: 'warning',
+        title: Vue.t('campus.toast.del'),
+        okEvent: 'campus.tipdialogDel'
+      })
     }
   }
 }

@@ -27,11 +27,10 @@ export default {
 
   methods: {
     add() {
-      this.pageState.propertyDialog.title = Vue.t('departCategory.propertyDialog.add_title')
       Vue.propertyDialog({
         currentView: 'departCategoryAddOrEdit',
         okEvent: 'departCategoryAddOrEdit:save',
-        title: Vue.t('departCategory.propertyDialog.title')
+        title: Vue.t('departCategory.propertyDialog.add_title')
       })
     },
 

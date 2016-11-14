@@ -8,22 +8,16 @@ import EmapForm from 'bh-vue/emap-form/emapForm.vue'
 export default {
   components: { EmapForm },
 
-  vuex: {
-    getters: {
-      pageState: function(state) {
-        return state.campusaddoredit
-      }
+  computed:{
+    pageState:function () {
+      return this.$store.state.campusaddoredit
     }
   },
 
-  events: {
-    'campusaddoredit:setvalue': function(val) {
-      this.$refs.form.setValue(val)
-    },
-    
-    'campusaddoredit:save': function() {
+  methods:{
+    save(){
       var ret = this.$refs.form.validate()
-      
+
       if (!ret) {
         return
       }
@@ -35,6 +29,10 @@ export default {
         })
         Vue.propertyDialog('hide')
       })
+    },
+
+    setValue(val){
+      this.$refs.form.setValue(val)
     }
   }
 }

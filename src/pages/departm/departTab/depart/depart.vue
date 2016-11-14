@@ -29,7 +29,6 @@ export default {
   methods: {
     add() {
       Vue.updateState('departAddOrEdit', { 'options.readonly': false })
-      this.pageState.paperDialog.title = Vue.t('depart.paperDialog.add_title')
       Vue.paperDialog({
         currentView: 'departAddOrEdit',
         title: Vue.t('depart.paperDialog.add_title')
@@ -68,7 +67,7 @@ export default {
     },
 
     'depart:grid:edit': function(row) {
-      this.setDepartFormReadOnly(false)
+      Vue.updateState('departAddOrEdit', { 'options.readonly': false })
       Vue.paperDialog({
         title: Vue.t('depart.paperDialog.edit_title'),
         currentView: 'departAddOrEdit',
@@ -87,7 +86,7 @@ export default {
     },
 
     'depart:grid:detail': function(row) {
-      this.setDepartFormReadOnly(true)
+      Vue.updateState('departAddOrEdit', { 'options.readonly': true })
       Vue.paperDialog({
         title: Vue.t('depart.paperDialog.detail_title'),
         currentView: 'departAddOrEdit',
