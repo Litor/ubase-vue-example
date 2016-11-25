@@ -133,14 +133,14 @@ src/
 #### 调用方式
 * 打开
 ```
-Vue.paperDialog({
+Utils.paperDialog({
     title: "编辑"
     currentView: 'addOrEdit'
 });
 ```
 * 手动隐藏
 ```
-Vue.paperDialog('hide')
+Utils.paperDialog('hide')
 ```
 
 #### Properties
@@ -155,16 +155,16 @@ Vue.paperDialog('hide')
 #### 调用方式
 * 打开
 ```
-Vue.propertyDialog({
+Utils.propertyDialog({
     currentView: 'departCategoryAddOrEdit',
-    okEvent: 'departCategoryAddOrEdit:save',
+    okEvent: 'departCategoryAddOrEdit.save',
     title: Vue.t('departCategory.propertyDialog.edit_title'),
     footerShow: false
 })
 ```
 * 手动隐藏
 ```
-Vue.propertyDialog('hide')
+Utils.propertyDialog('hide')
 ```
 
 #### Properties
@@ -174,12 +174,12 @@ Vue.propertyDialog('hide')
 | currentView | 组件名称 | String | -- | 弹框中需要显示的vue组件名称（框架通过动态组件加载）|
 | title | 弹框标题 | String | -- | 如果动态组件中未设置h2标题，则弹框的标题为该title |
 | footerShow | 是否显示底部按钮 | true | -- | 底部按钮区域是否显示 |
-| okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件 |
+| okEvent | 确定按钮事件 | Function | -- | 底部确定按钮事件，'.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
 
 ### 对话框
 * 打开
 ```
-Vue.dialog({
+Utils.dialog({
     currentView: 'departCategoryAddOrEdit',
     title: Vue.t('departCategory.propertyDialog.edit_title'),
     width: '400px',
@@ -188,7 +188,7 @@ Vue.dialog({
 ```
 * 手动隐藏
 ```
-Vue.dialog('hide')
+Utils.dialog('hide')
 ```
 
 #### Properties
@@ -205,7 +205,7 @@ Vue.dialog('hide')
 ### tip弹框
 * 打开
 ```
-Vue.tip({
+Utils.tip({
     content: '保存成功！',
     state: 'success',
 })
@@ -225,11 +225,11 @@ Vue.tip({
 ### toast弹框
 * 打开
 ```
-Vue.toast({
+Utils.toast({
     type: 'warning',
     title: '确定删除吗？',
     content: '删除后数据将无法恢复？',
-    okEvent: 'campus:tipdialog:del'
+    okEvent: 'moduleName.methodName'
 })
 ```
 
@@ -240,7 +240,7 @@ Vue.toast({
 | title | 提示标题 | String | -- |   |
 | content | 弹框内容 | String | -- | |
 | type | 弹框类型 | String | -- | 可选值：success, warning, danger |
-| okEvent | 确定按钮事件 | Function | -- |  |
+| okEvent | 确定按钮事件 | Function | -- | '.'前面是.vue文件的名称，'.'后面是该vue文件内methods下面的方法 |
 | okText | 确定按钮文字 | String | 确定 | |
 | cancelEvent | 取消按钮事件 | Function | -- |  |
 | cancelText | 取消按钮文字 | String | 取消 |  |
@@ -249,7 +249,7 @@ Vue.toast({
 ### pop弹框
 * 打开
 ```
-Vue.pop({
+Utils.pop({
     selector: event.currentTarget
     currentView: 'departCategoryAddOrEdit',
     width:'500px',
@@ -266,14 +266,14 @@ Vue.pop({
 | width | 宽度 | String | -- | 对话框宽度 |
 | height | 高度 | String | --' | 对话框高度 |
 
-## 事件触发方式
+## 跨组件方法调用方式
 ```
-Vue.broadcast('module1:setvalue', row)  // module1:setvalue定义在vue文件中的events中
+Ubase.invoke('module1.setValue', row)  // 调用的是module1.vue里面methods下的setValue方法
 ```
 
 ## state更新方式
 ```
-Vue.updateState('test', {'emapCard.params': {a: 1}, 'title': '标题'}) // test表示要更新test.vuex.js中的state
+Ubase.updateState('test', {'emapCard.params': {a: 1}, 'title': '标题'}) // test表示要更新test.vuex.js中的state
 ```
 
 ## Setup

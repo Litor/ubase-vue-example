@@ -2,6 +2,8 @@ import path from 'path';
 import ubaseGulp from 'ubase-vue/dist/apptools/webpack/gulp';
 
 let userConfig = {
+
+  langs:['cn', 'en'],
   // 配置别名
   alias: {
     'components': path.resolve(__dirname, './src/components')
