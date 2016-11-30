@@ -1,7 +1,7 @@
 import path from 'path';
-import ubaseGulp from 'ubase-vue/dist/apptools/webpack/gulp';
+import ubase from 'ubase-vue';
 
-let userConfig = {
+ubase({
 
   langs:['cn', 'en'],
   // 配置别名
@@ -19,6 +19,4 @@ let userConfig = {
   proxy: [{ source: '/jcsj-apps-web', target: 'http://res.wisedu.com:8000' },
     { source: '/yxxzry-apps-web', target: 'http://res.wisedu.com:8000' },
     { source: '/iap-mngt', target: 'http://res.wisedu.com:8000' }]
-};
-
-ubaseGulp(path, userConfig);
+});
