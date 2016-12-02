@@ -10,7 +10,7 @@ ubase({
   },
 
   // 端口
-  port: '8081',
+  port: '8083',
 
   // meta地址
   metaInfoUrl: 'http://res.wisedu.com/WeCloud/emap-meta/manage-apps/jcsj-apps/',

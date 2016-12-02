@@ -121,4 +121,8 @@
     background-color: #ffffff;
     border-radius: 8px;
   }
+
+  body{
+    background-color: #e0e6ed!important;
+  }
 </style>
