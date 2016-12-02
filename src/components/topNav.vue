@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="cus-top-nav">
-      <title>认证管理中心</title>
+      <title>{{title}}</title>
       <nav>
         <a href="#{{item.route}}" class="cus-top-nav-hover" :class="selectedRoute==item.route?'a-selected':''"
            @click="changeRoute(item.route)" v-for="item in menu">
@@ -18,6 +18,10 @@
 
   export default {
     props: {
+      title:{
+        type: String,
+        default: ''
+      },
       menu: {
         type: Array,
         default: []

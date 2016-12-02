@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ubase-vue": "^1.0.48",
     "bh-vue": "^1.2.8",
+    "ubase-vue": "^1.0.63",
     "wec-vue": "^0.1.7"
   }
 }

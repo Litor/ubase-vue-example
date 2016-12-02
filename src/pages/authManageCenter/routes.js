@@ -1,10 +1,10 @@
-import authManageCenter from './authManageCenter/authManageCenter.vue';
-import userManage from './authManageCenter/userManage/userManage.vue';
-import userAuthSetting from './authManageCenter/userAuthSetting/userAuthSetting.vue';
+import frame from './frame'
+import userManage from './userManage/userManage.vue';
+import userAuthSetting from './userAuthSetting/userAuthSetting.vue';
 
 export default {
   '/': {
-    component: authManageCenter,
+    component: frame,
     subRoutes:{
       '/userManage':{
         component:userManage
