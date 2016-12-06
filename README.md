@@ -5,12 +5,6 @@ vue application based ubase-vue
 * [前端基础入门](#starting)
 * [准备工作](#prepare)
 * [快速入门](#quick-start)
-* [应用目录结构](#structure)
-* [config.json配置项说明](#config)
-* [gulpfile.babel.js配置说明](#gulp)
-* [支持弹框类型(6种)](#dialog)
-* [事件触发方式](#event)
-* [state更新方式](#state)
 
 
 ## 前端基础入门
@@ -32,4 +26,4 @@ vue application based ubase-vue
 * 当前目录命令行下执行gulp命令.
 * 打开浏览器进入 http://localhost:8081 查看.
 
-详细文档[https://github.com/wisedu/ubase-wisedu]
+## 详细文档[https://github.com/wisedu/ubase-wisedu]
