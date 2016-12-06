@@ -1,0 +1,1 @@
+{"models":[{"name":"postManage_savePostStaff","appName":"","modelName":"新增任职人员","url":"/yxxzry/postManage/savePostStaff","controls":[{"name":"id","dataType":"string","caption":"人员id"},{"name":"departId","dataType":"string","caption":"单位代码"},{"name":"postId","dataType":"string","caption":"岗位代码"},{"name":"postLevel","dataType":"string","caption":"岗位级别"}]}]}

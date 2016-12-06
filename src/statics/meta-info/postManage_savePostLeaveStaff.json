@@ -1,0 +1,1 @@
+{"models":[{"name":"postManage_savePostLeaveStaff","appName":"","modelName":"离职任职人员","url":"/yxxzry/postManage/savePostLeaveStaff","controls":[{"name":"wids","dataType":"string","caption":"离职人员id集合[1,2,3]"},{"name":"content","dataType":"string","caption":"离职原因"},{"name":"date","dataType":"string","caption":"离职日期"}]}]}

@@ -1,4 +1,4 @@
-import postSetting from './postSetting.vue';
+import postSetting from './postSetting/postSetting.vue';
 
 export default {
   '/': {

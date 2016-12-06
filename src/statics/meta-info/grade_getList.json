@@ -1,1 +1,0 @@
-{"models":[{"name":"grade_getList","appName":"","modelName":"grade_getList","url":"/jcsj-apps-web/grade/getList","controls":[{"name":"wid","dataType":"string","caption":"年级wid","hidden":true},{"name":"code","dataType":"integer","caption":"代码"},{"name":"name","dataType":"string","caption":"名称"}]}]}
