@@ -26,4 +26,4 @@ vue application based ubase-vue
 * 当前目录命令行下执行gulp命令.
 * 打开浏览器进入 http://localhost:8081 查看.
 
-## 详细文档[https://github.com/wisedu/ubase-wisedu]
+## [详细文档](https://github.com/wisedu/ubase-wisedu)
