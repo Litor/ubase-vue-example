@@ -22,8 +22,8 @@ vue application based ubase-vue
 
 * 生成APP目录结构，进入项目待存放目录，打开命令行执行：yo vum，选择ubase选项->输入项目名称->回车
 * 生成APP页面， 进入第一步生成的src/pages/文件夹，打开命令行执行：yo vum，选择页面类型 -> 回答是否是app的第一个页面 -> 输入页面名称（名称由字母组成）->回车
-
-* 当前目录命令行下执行gulp命令.
+* 在项目根目录下执行npm i --registry=https://registry.npm.taobao.org --sass-binary-site=http://res.wisedu.com/FS/tools
+* 在项目根目录下执行gulp命令启动项目
 * 打开浏览器进入 http://localhost:8081 查看.
 
 ## [详细文档](https://github.com/wisedu/ubase-wisedu)
